@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
                             Icon(
                                 Icons.Filled.Menu,
                                 contentDescription = "Menu",
+                                modifier = Modifier.size(30.dp)
                             )
                             Spacer(modifier = Modifier.width(200.dp))
                             Button(
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                                     start = 20.dp
                                 )
                             ) {
-                                Text("Favorites")
+                                Text("Favourites")
                             }
                             Spacer(modifier = Modifier.width(30.dp))
                             Button(
@@ -55,12 +56,17 @@ class MainActivity : ComponentActivity() {
 
                     bottomBar = {
                         BottomAppBar {
-                            Spacer()
+                            Spacer(modifier = Modifier.width(10.dp))
                             Icon(
                                 Icons.Filled.Edit,
                                 contentDescription = "create a weekly list",
                                 modifier=Modifier.size(30.dp)
-
+                            )
+                            Spacer(modifier= Modifier.width(140.dp))
+                            Icon(
+                                Icons.Filled.Add,
+                                contentDescription = "Add a list nigga!",
+                                modifier =Modifier.size(40.dp)
                             )
                         }
                     }
