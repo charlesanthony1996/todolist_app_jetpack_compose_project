@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -81,6 +82,8 @@ class MainActivity : ComponentActivity() {
                         }
                     },
 
+
+
                     bottomBar = {
                         BottomAppBar {
                             Spacer(modifier = Modifier.width(10.dp))
@@ -108,11 +111,23 @@ class MainActivity : ComponentActivity() {
 
                     drawerContent = {
                         Column {
+                            Card(modifier = Modifier.fillMaxWidth(),
+
+                            ) {
+                                Icon(
+                                    Icons.Outlined.AccountCircle,
+                                    contentDescription = "User profile picture",
+                                    modifier = Modifier.size(50.dp)
+                                )
+                            }
+                            Divider()
+                            Spacer(modifier = Modifier.fillMaxWidth())
                             Button(
                                 onClick = {/**/ },
                                 contentPadding = PaddingValues(
                                     start = 0.dp, end = 0.dp
-                                )
+                                ),
+                                modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text("Yearly Balance")
                             }
@@ -121,7 +136,8 @@ class MainActivity : ComponentActivity() {
                                 onClick = {/**/ },
                                 contentPadding = PaddingValues(
                                     start = 0.dp, end = 0.dp
-                                )
+                                ),
+                                modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text("Goals")
                             }
@@ -130,7 +146,8 @@ class MainActivity : ComponentActivity() {
                                 onClick = {/**/ },
                                 contentPadding = PaddingValues(
                                     start = 0.dp, end = 0.dp
-                                )
+                                ),
+                                modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text("External links")
                             }
@@ -139,7 +156,8 @@ class MainActivity : ComponentActivity() {
                                 onClick = {/**/ },
                                 contentPadding = PaddingValues(
                                     start = 0.dp, end = 0.dp
-                                )
+                                ),
+                                modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text("Configuration")
                             }
@@ -149,6 +167,27 @@ class MainActivity : ComponentActivity() {
                 )
                 {
                     // Screen content
+//                    Welcome and name
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text("Welcome")
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text("Name: ")
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Card(
+                            modifier = Modifier.width(200.dp)
+                        ) {
+                            Column (
+                                modifier = Modifier.width(200.dp),
+//                                verticalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Text("Current Month")
+                            }
+                        }
+                    }
 
 
                 }
