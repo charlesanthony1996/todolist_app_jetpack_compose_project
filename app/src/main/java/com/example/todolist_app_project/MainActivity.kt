@@ -11,25 +11,64 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.room.*
 import com.example.todolist_app_project.ui.theme.Todolist_app_projectTheme
+
+
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+
+
             Todolist_app_projectTheme {
                 // A surface container using the 'background' color from the theme
+//                @Composable
+//                fun NewView() {
+//                    Text("This is the new view")
+//                }
+//
+//                val navController = rememberNavController()
+//
+//                NavHost(navController = navController, startDestination = "main") {
+//                    composable("main") { MainActivity() }
+//                    composable("new") { NewView() }
+//                }
+//
+//                Button(onClick = { rememberNavController.navigate("new") }) {
+//                    Text("Go to New View")
+//                }
+
+
+
+
+
+
+
                 Scaffold(
                     topBar = {
                         TopAppBar {
-                            Icon(
-                                Icons.Filled.Menu,
-                                contentDescription = "Menu",
-                                modifier = Modifier.size(30.dp)
-                            )
-                            Spacer(modifier = Modifier.width(200.dp))
+                            Button(
+                                onClick= {/* */},
+                                contentPadding = PaddingValues(
+                                    start= 0.dp
+                                )
+                            ) {
+                                Icon(
+
+                                    Icons.Filled.Menu,
+                                    contentDescription = "Menu",
+                                    modifier = Modifier.size(30.dp)
+                                )
+
+                            }
+                            Spacer(modifier = Modifier.width(180.dp))
                             Button(
                                 onClick = {/* */ },
                                 contentPadding = PaddingValues(
@@ -38,11 +77,11 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Text("Favourites")
                             }
-                            Spacer(modifier = Modifier.width(30.dp))
+                            Spacer(modifier = Modifier.width(0.dp))
                             Button(
                                 onClick = {},
                                 contentPadding = PaddingValues(
-                                    start = 10.dp, end = 10.dp
+                                    start = 0.dp, end = 0.dp
                                 )
                             ) {
                                 Icon(
@@ -91,6 +130,30 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+fun DestinationView() {
+    Text("This is the categories view nigga!")
+}
+
+@Composable
+fun MainView() {
+    val navController = rememberNavController()
+    Column {
+        TopAppBar(
+            title = { Text("Main View") },
+        )
+        Button(onClick = { navController.navigate("new") }) {
+            Text("Go to New View")
+        }
+    }
+    NavHost(navController = navController, startDestination = "main") {
+        composable("main") { MainActivity() }
+        composable("new") { DestinationView() }
+    }
+}
+
+
+
 
 
 //creating the database here -> crud
@@ -116,4 +179,5 @@ interface ItemDao {
     @Delete
     fun deleteItem(item: Item)
 }
+
 
