@@ -1,10 +1,12 @@
 package com.example.todolist_app_project
 
+import android.hardware.camera2.params.BlackLevelPattern
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -87,27 +89,67 @@ class MainActivity : ComponentActivity() {
                                 contentDescription = "create a weekly list",
                                 modifier=Modifier.size(30.dp)
                             )
-                            Spacer(modifier= Modifier.width(140.dp))
-                            Icon(
-                                Icons.Filled.Add,
-                                contentDescription = "Add a list nigga!",
-                                modifier =Modifier.size(40.dp)
-                            )
+                            Spacer(modifier= Modifier.width(130.dp))
+                            Button(
+                                onClick= {/**/},
+                                contentPadding = PaddingValues(
+                                    start = 0.dp, end = 0.dp,
+                                ),
+                                shape= MaterialTheme.shapes.large,
+                            ) {
+                                Icon(
+                                    Icons.Filled.Add,
+                                    contentDescription = "Add a list nigga!",
+                                    modifier = Modifier.size(40.dp),
+                                )
+                            }
                         }
                     },
 
                     drawerContent = {
-                        Text("Drawer here")
+                        Column {
+                            Button(
+                                onClick = {/**/ },
+                                contentPadding = PaddingValues(
+                                    start = 0.dp, end = 0.dp
+                                )
+                            ) {
+                                Text("Yearly Balance")
+                            }
+                            Divider()
+                            Button(
+                                onClick = {/**/ },
+                                contentPadding = PaddingValues(
+                                    start = 0.dp, end = 0.dp
+                                )
+                            ) {
+                                Text("Goals")
+                            }
+                            Divider()
+                            Button(
+                                onClick = {/**/ },
+                                contentPadding = PaddingValues(
+                                    start = 0.dp, end = 0.dp
+                                )
+                            ) {
+                                Text("External links")
+                            }
+                            Divider()
+                            Button(
+                                onClick = {/**/ },
+                                contentPadding = PaddingValues(
+                                    start = 0.dp, end = 0.dp
+                                )
+                            ) {
+                                Text("Configuration")
+                            }
+                            Divider()
+                        }
                     }
-
-
-
                 )
-
-
-
                 {
                     // Screen content
+
 
                 }
 
