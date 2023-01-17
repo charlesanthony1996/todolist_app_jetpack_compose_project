@@ -11,8 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.example.todolist_app_project.ui.theme.Todolist_app_projectTheme
 
 
@@ -52,25 +51,33 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
-                    }
-                ) {
-                    // Screen content
-                }
+                    },
 
-//               bottom bar init
-                Scaffold(
                     bottomBar = {
                         BottomAppBar {
+                            Spacer()
                             Icon(
                                 Icons.Filled.Edit,
-                                contentDescription = "create the weekly list",
+                                contentDescription = "create a weekly list",
                                 modifier=Modifier.size(30.dp)
+
                             )
                         }
                     }
-                ) {
+
+
+
+                )
+
+
+
+                {
                     // Screen content
+
                 }
+
+
+
 
             }
 
@@ -84,6 +91,23 @@ class MainActivity : ComponentActivity() {
 @Entity(tableName="items")
 data class Item(
     @PrimaryKey val id: Int,
-
+    val name:String,
+    val price:Double,
+    val totalPrice: Double
 )
+
+@Dao
+interface ItemDao {
+    @Insert
+    fun insertItem(item: Item)
+
+    @Query("SELECT * FROM items")
+    fun getAllItems(): List<Item>
+
+    @Update
+    fun updateItem(item: Item)
+
+    @Delete
+    fun deleteItem(item: Item)
+}
 
