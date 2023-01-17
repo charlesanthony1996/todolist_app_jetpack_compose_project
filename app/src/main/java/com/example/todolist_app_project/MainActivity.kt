@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,22 +28,34 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar {
-                            Text("Shopping list app")
+                            Icon(
+                                Icons.Filled.Menu,
+                                contentDescription = "Menu",
+                            )
+                            Spacer(modifier = Modifier.width(200.dp))
                             Button(onClick={/* */},
                             contentPadding = PaddingValues(
                                 start= 20.dp
                             )) {
-                                Text("Add item")
+                                Text("Favorites")
                             }
-
+                            Spacer(modifier = Modifier.width(30.dp))
+                            Button(onClick={},
+                            contentPadding= PaddingValues(
+                                start=10.dp,end=10.dp
+                            )
+                            ) {
+                                Icon(
+                                    Icons.Filled.Person,
+                                    contentDescription="Settings",
+                                    modifier=Modifier.size(ButtonDefaults.IconSize)
+                                )
+                            }
                         }
                     }
                 ) {
                     // Screen content
                 }
-
-
-
             }
         }
     }
