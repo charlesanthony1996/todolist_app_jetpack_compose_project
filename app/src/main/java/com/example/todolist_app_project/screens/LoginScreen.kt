@@ -3,10 +3,9 @@ package com.example.todolist_app_project.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +37,18 @@ fun LoginScreen(navController: NavController) {
                 text = "Login Screen",
                 fontSize = MaterialTheme.typography.h3.fontSize,
                 fontWeight = FontWeight.Bold
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp),
+            horizontalArrangement =
+        ) {
+            Icon(
+                Icons.Filled.Person,
+                contentDescription = "Person",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
             )
         }
         Row(
