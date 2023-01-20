@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">todolist_app_project</string>
     <string name="title_activity_categories_view">CategoriesView</string>
+    <string name="back_icon">back icon</string>
+
+    <!-- Login screen-->
+    <string name="login">Login</string>
+    <string name="sign_in_with_email">Sign in with email</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+
+    <!-- Email login screen -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create">Create</string>
+
+    <!-- Welcome screen -->
+    <string name="welcome">Welcome</string>
+    <string name="log_out">Log out</string>
+    <string name="welcome_logged_in">Welcome! You\'re logged in!</string>
 </resources>
