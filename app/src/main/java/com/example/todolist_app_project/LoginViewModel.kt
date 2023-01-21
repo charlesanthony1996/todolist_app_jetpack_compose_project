@@ -111,4 +111,22 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         Firebase.auth.signOut()
         _isLoggedIn.value = false
     }
+
+    fun signInAnonymously() = viewModelScope.launch {
+        Firebase.auth.signInAnonymously()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInAnonymously:success")
+                    val user = Firebase.auth.currentUser
+                    _isLoggedIn.value = true
+                    // Navigate to Welcome Screen
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInAnonymously:failure", task.exception)
+                    _error.value = task.exception?.localizedMessage ?: "Unknown error"
+                }
+            }
+    }
+
 }

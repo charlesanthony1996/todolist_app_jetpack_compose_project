@@ -103,6 +103,7 @@ fun loginPage(builder: NavGraphBuilder, navController: NavHostController, loginV
         loginViewModel.setError("")
         LoginScreen(
             emailLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
+            guestLoginClick = {navController.navigate(NavigationEnum.EmailLogin.name)},
             viewModel = loginViewModel
         )
     }

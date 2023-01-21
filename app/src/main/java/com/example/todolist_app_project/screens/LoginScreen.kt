@@ -37,10 +37,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.todolist_app_project.R
 import com.example.todolist_app_project.NavigationEnum
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todolist_app_project.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 //@Composable
 //fun LoginScreen(navController: NavController) {
@@ -104,7 +107,7 @@ import com.google.android.gms.common.api.ApiException
 private const val TAG = "LoginScreen"
 
 @Composable
-fun LoginScreen(emailLoginClick: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(emailLoginClick: () -> Unit,guestLoginClick: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -122,6 +125,7 @@ fun LoginScreen(emailLoginClick: () -> Unit, viewModel: LoginViewModel = hiltVie
         }
         SignInWithEmailButton(buttonWidth, emailLoginClick)
         SignInWithGoogleButton(buttonWidth, viewModel)
+        SignInWithGuestButton(buttonWidth, viewModel)
     }
 }
 
@@ -149,6 +153,23 @@ fun SignInWithEmailButton(buttonWidth: Dp, emailLoginClick: () -> Unit) {
         SignInButtonRow(iconId = R.drawable.ic_baseline_mail_24, buttonTextId = R.string.sign_in_with_email)
     }
 }
+
+@Composable
+fun SignInWithGuestButton(buttonWidth: Dp, viewModel: LoginViewModel) {
+    OutlinedButton(
+        onClick = { viewModel.signInAnonymously() },
+        modifier = Modifier.width(buttonWidth),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(R.color.red),
+            contentColor = colorResource(R.color.white)
+        )
+    ) {
+        SignInButtonRow(iconId = R.drawable.ic_baseline_login_24, buttonTextId = R.string.guest)
+    }
+}
+
+
+
 
 @Composable
 fun SignInWithGoogleButton(buttonWidth: Dp, viewModel: LoginViewModel) {
