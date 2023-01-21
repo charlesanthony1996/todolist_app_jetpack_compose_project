@@ -1,6 +1,9 @@
 package com.example.todolist_app_project.screens
 
 import android.os.Build.VERSION_CODES.R
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -51,16 +54,8 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
             },
             bottomBar = {
                 BottomAppBar{
-//                    Button(onClick= {/* */ },
-//                    contentPadding = PaddingValues(start=0.dp, bottom=0.dp, end=0.dp, top=0.dp)
-//                    ) {
-//                        Icon(
-//                            Icons.Filled.Menu,
-//                            contentDescription = "Menu",
-//                            modifier = Modifier.size(ButtonDefaults.IconSize)
-//                        )
-//                    }
-            }
+
+                }
             },
             floatingActionButton = {
                 FloatingActionButton(onClick= { /* */}, modifier= Modifier.wrapContentSize(Center)) {
@@ -74,6 +69,23 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
         ) {
 //            WelcomeText()
 //            LogoutButton(viewModel)
+//            card content here
+            Card(modifier = Modifier
+                .height(60.dp)
+                .width(500.dp)
+                .border(2.dp, MaterialTheme.colors.onSecondary)
+                .padding(10.dp),
+            elevation = 10.dp) {
+                Column (
+//                    your card content here
+                    modifier = Modifier.padding(10.dp)
+                ) {
+                    Text(
+                        "Welcome"
+                    )
+                    Text("Name: ")
+                }
+            }
         }
     }
 }
