@@ -71,19 +71,43 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
 //            LogoutButton(viewModel)
 //            card content here
             Card(modifier = Modifier
-                .height(60.dp)
+                .height(100.dp)
                 .width(500.dp)
-                .border(2.dp, MaterialTheme.colors.onSecondary)
-                .padding(10.dp),
+                .border(1.dp, MaterialTheme.colors.onSecondary)
+                .padding(0.dp),
             elevation = 10.dp) {
                 Column (
 //                    your card content here
-                    modifier = Modifier.padding(10.dp)
+                    modifier = Modifier.padding(0.dp)
                 ) {
                     Text(
                         "Welcome"
                     )
                     Text("Name: ")
+                }
+
+//                Spacer(modifier = Modifier.height(10.dp))
+
+            }
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+            Divider()
+
+            Card(modifier = Modifier
+                .height(200.dp)
+                .width(500.dp)
+                .border(1.dp, MaterialTheme.colors.onSecondary)
+                .padding(top = 100.dp),
+                elevation = 10.dp) {
+                Column(
+//                    your card content here
+                    modifier = Modifier.padding(0.dp)
+                ) {
+                    Text(
+                        "Current Month"
+                    )
+                    Text("February: ")
+                    Text("Spent: 90€")
+                    Text("See details")
                 }
             }
         }
