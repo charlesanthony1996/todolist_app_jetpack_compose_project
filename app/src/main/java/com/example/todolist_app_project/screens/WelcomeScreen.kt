@@ -11,7 +11,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -31,30 +33,55 @@ import com.example.todolist_app_project.LoginViewModel
 import com.example.todolist_app_project.NavigateBetweenScreen
 import com.example.todolist_app_project.NavigationEnum
 import com.example.todolist_app_project.R
-
-
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun WelcomeScreen(viewModel: LoginViewModel) {
+    var isDrawerOpen = false
+    val navController = rememberNavController()
+
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+
     Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center) {
         Scaffold(
+            scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar {
-                    Button(onClick = { /* */},
+                    Button(onClick = { /* */ },
                     contentPadding = PaddingValues(start=0.dp, end=0.dp)
                     ) {
                         Icon(
                             Icons.Filled.Menu,
                             contentDescription = "Menu",
                             modifier = Modifier.size(ButtonDefaults.IconSize)
+                                .clickable(onClick= {
+                                    scope.launch {
+                                        scaffoldState.drawerState.apply {
+                                            if (isClosed) open() else close()
+                                        }
+                                    }
+                                })
                         )
                     }
                 }
             },
+//            drawer content here
+            drawerContent = {
+                            Column{
+                                Card(modifier = Modifier.fillMaxWidth(),)
+                                {
+                                    Icon(
+                                        Icons.Outlined.AccountCircle,
+                                        contentDescription = "User profile picture",
+
+                                    )
+                                }
+                            }
+            },
             bottomBar = {
                 BottomAppBar{
-
                 }
             },
             floatingActionButton = {
@@ -67,7 +94,8 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                         modifier = Modifier.size(ButtonDefaults.IconSize),
                     )
                 }
-            }
+            },
+
         ) {
             Card(modifier = Modifier
                 .height(100.dp)
