@@ -5,11 +5,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -30,16 +34,12 @@ import com.example.todolist_app_project.R
 
 @Composable
 fun WelcomeScreen(viewModel: LoginViewModel) {
-    Column(modifier = Modifier.padding(top = 8.dp)) {
-        WelcomeText()
-        LogoutButton(viewModel)
-    }
     Column(modifier = Modifier.padding(top = 0.dp)) {
         Scaffold(
-            bottomBar = {
-                BottomAppBar{
-                    Button(onClick= {/* */ },
-                    contentPadding = PaddingValues(start=0.dp, bottom=0.dp, end=0.dp, top=0.dp)
+            topBar = {
+                TopAppBar {
+                    Button(onClick = { /* */},
+                    contentPadding = PaddingValues(start=0.dp, end=0.dp)
                     ) {
                         Icon(
                             Icons.Filled.Menu,
@@ -47,10 +47,33 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                             modifier = Modifier.size(ButtonDefaults.IconSize)
                         )
                     }
+                }
+            },
+            bottomBar = {
+                BottomAppBar{
+//                    Button(onClick= {/* */ },
+//                    contentPadding = PaddingValues(start=0.dp, bottom=0.dp, end=0.dp, top=0.dp)
+//                    ) {
+//                        Icon(
+//                            Icons.Filled.Menu,
+//                            contentDescription = "Menu",
+//                            modifier = Modifier.size(ButtonDefaults.IconSize)
+//                        )
+//                    }
             }
+            },
+            floatingActionButton = {
+                FloatingActionButton(onClick= { /* */}, modifier= Modifier.wrapContentSize(Center)) {
+                    Icon(
+                        Icons.Filled.Add,
+                        contentDescription = "create a weekly list",
+                        modifier = Modifier.size(ButtonDefaults.IconSize),
+                    )
+                }
             }
         ) {
-
+//            WelcomeText()
+//            LogoutButton(viewModel)
         }
     }
 }
