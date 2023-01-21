@@ -37,7 +37,7 @@ import com.example.todolist_app_project.R
 
 @Composable
 fun WelcomeScreen(viewModel: LoginViewModel) {
-    Column(modifier = Modifier.padding(top = 0.dp)) {
+    Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center) {
         Scaffold(
             topBar = {
                 TopAppBar {
@@ -58,7 +58,9 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick= { /* */}, modifier= Modifier.wrapContentSize(Center)) {
+                FloatingActionButton(onClick= { /* */},
+                    modifier= Modifier.padding(0.dp),
+                ) {
                     Icon(
                         Icons.Filled.Add,
                         contentDescription = "create a weekly list",
@@ -67,9 +69,6 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                 }
             }
         ) {
-//            WelcomeText()
-//            LogoutButton(viewModel)
-//            card content here
             Card(modifier = Modifier
                 .height(100.dp)
                 .width(500.dp)
@@ -86,11 +85,8 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                     Text("Name: ")
                 }
 
-//                Spacer(modifier = Modifier.height(10.dp))
-
             }
-            Spacer(modifier = Modifier.padding(top = 10.dp))
-            Divider()
+            Spacer(modifier = Modifier.height(20.dp))
 
             Card(modifier = Modifier
                 .height(200.dp)
