@@ -44,7 +44,7 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
     val scope = rememberCoroutineScope()
 
 
-    Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column( modifier = Modifier.padding(0.dp), verticalArrangement = Arrangement.Center) {
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
@@ -59,23 +59,27 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
             },
 
         ) {
+            AddItemForm()
+
 
 //            firebase addition
-            val itemName = remember { mutableStateOf("") }
-            var itemPrice = remember { mutableStateOf("") }
-
-                TextField(
-                    value = itemName.value,
-                    onValueChange = { itemName.value = it },
-                    label = { Text("Item Name") }
-                )
+//            val itemName = remember { mutableStateOf("") }
+//            var itemPrice = remember { mutableStateOf("") }
+//
+//                TextField(
+//                    modifier = Modifier.padding(start = 10.dp),
+//                    value = itemName.value,
+//                    onValueChange = { itemName.value = it },
+//                    label = { Text("Item Name") }
+//                )
 //            Divider()
-            Spacer (modifier = Modifier.size(30.dp))
-                TextField(
-                    value = itemPrice.value,
-                    onValueChange = { itemPrice.value = it },
-                    label = { Text("Item Price") }
-                )
+//            Spacer (modifier = Modifier.height(10.dp))
+//                TextField(
+//                    modifier = Modifier.padding(start = 0.dp),
+//                    value = itemPrice.value,
+//                    onValueChange = { itemPrice.value = it },
+//                    label = { Text("Item Price") }
+//                )
 
 
 //            Button(onClick = {
@@ -92,6 +96,38 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
 //                Text("Submit")
 //            }
 
+        }
+    }
+}
+
+
+@Composable
+fun AddItemForm() {
+    val itemName = remember { mutableStateOf("") }
+    val itemPrice = remember { mutableStateOf("") }
+
+    Column {
+        TextField(
+            value = itemName.value,
+            onValueChange = { itemName.value = it },
+            label = { Text("Item Name") }
+        )
+        TextField(
+            value = itemPrice.value,
+            onValueChange = { itemPrice.value = it },
+            label = { Text("Item Price") }
+        )
+        Button(onClick = {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("items")
+                .add(mapOf("name" to itemName.value, "price" to itemPrice.value.toDouble()))
+                .addOnSuccessListener {
+                    // Clear the form after successful submission
+                    itemName.value = ""
+                    itemPrice.value = ""
+                }
+        }) {
+            Text("Submit")
         }
     }
 }
