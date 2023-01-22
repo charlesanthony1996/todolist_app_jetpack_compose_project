@@ -11,6 +11,9 @@ enum class NavigationEnum (val title: Int) {
     ),
     Welcome(
         title = R.string.welcome
+    ),
+    CreateWeeklyList(
+        title = R.string.create_weekly_list
     );
 
     companion object {
@@ -28,8 +31,15 @@ enum class NavigationEnum (val title: Int) {
                     Login.name -> Welcome
                     EmailLogin.name -> Welcome
                     null -> Welcome
+                    null -> CreateWeeklyList
                     else -> throw IllegalArgumentException("Route $route is not recognized.")
                 }
+            }
+        }
+
+        fun toRoute(route: String?, isLoggedIn: State<Boolean>) {
+            when (route?.substringBefore("/")) {
+                CreateWeeklyList.name -> CreateWeeklyList
             }
         }
     }

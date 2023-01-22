@@ -129,4 +129,10 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             }
     }
 
+    fun goToCreateWeeklyList() = viewModelScope.launch {
+
+    }
+
+
+
 }
