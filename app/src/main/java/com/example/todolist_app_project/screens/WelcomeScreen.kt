@@ -162,7 +162,7 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick= { viewModel.goToCreateWeeklyList() },
+                FloatingActionButton(onClick= { /**/ },
                     modifier= Modifier.padding(0.dp),
                 ) {
                     Icon(
@@ -172,6 +172,7 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
                     )
                 }
             },
+            floatingActionButtonPosition = FabPosition.Center
 
         ) {
             Card(modifier = Modifier

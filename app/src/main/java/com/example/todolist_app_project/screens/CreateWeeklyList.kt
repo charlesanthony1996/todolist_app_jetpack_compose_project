@@ -13,6 +13,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
@@ -33,6 +35,7 @@ import com.example.todolist_app_project.LoginViewModel
 import com.example.todolist_app_project.NavigateBetweenScreen
 import com.example.todolist_app_project.NavigationEnum
 import com.example.todolist_app_project.R
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 @Composable
@@ -41,19 +44,54 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
     val scope = rememberCoroutineScope()
 
 
-    Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center) {
+    Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar {
                     Text("This is it")
                 }
-            }
+            },
+            bottomBar = {
+                BottomAppBar {
+                    Text("This is it")
+                }
+            },
+
         ) {
+
+//            firebase addition
+            val itemName = remember { mutableStateOf("") }
+            var itemPrice = remember { mutableStateOf("") }
+
+                TextField(
+                    value = itemName.value,
+                    onValueChange = { itemName.value = it },
+                    label = { Text("Item Name") }
+                )
+//            Divider()
+            Spacer (modifier = Modifier.size(30.dp))
+                TextField(
+                    value = itemPrice.value,
+                    onValueChange = { itemPrice.value = it },
+                    label = { Text("Item Price") }
+                )
+
+
+//            Button(onClick = {
+//                val db = FirebaseFirestore.getInstance()
+//                db.collection("items")
+//                    .add(mapOf("name" to itemName.value, "price" to itemPrice.value.toDouble()))
+//                    .addOnSuccessListener {
+//                        // Clear the form after successful submission
+//                        itemName.value = ""
+//                        itemPrice.value = ""
+//                    }
+//            },
+//            modifier = Modifier) {
+//                Text("Submit")
+//            }
 
         }
     }
 }
-
-
-
