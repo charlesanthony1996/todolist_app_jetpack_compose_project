@@ -85,7 +85,7 @@ fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: Logi
         // TODO viewModels() di doesn't work inside this anymore, every page creates with it own lifecycle
         loginPage(this, navController, loginViewModel)
         emailLoginPage(this, loginViewModel)
-        welcomePage(this, loginViewModel)
+        welcomePage(this, navController, loginViewModel)
         createWeeklyListPage(this,navController, loginViewModel)
     }
 }
@@ -108,9 +108,12 @@ fun emailLoginPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
     }
 }
 
-fun welcomePage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
+fun welcomePage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
     builder.composable(route = NavigationEnum.Welcome.name) {
-        WelcomeScreen(loginViewModel)
+        WelcomeScreen(
+            CreateWeeklyListScreenClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
+            loginViewModel
+        )
     }
 }
 

@@ -19,11 +19,13 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -37,7 +39,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun WelcomeScreen(viewModel: LoginViewModel) {
+fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
     var isDrawerOpen = false
     val navController = rememberNavController()
 
@@ -155,14 +157,8 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
             },
             bottomBar = {
                 BottomAppBar{
-                    Button (
-                        onClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
-                        modifier= Modifier
-                            .width(100.dp)
-                            .height(50.dp),
-                            ){
-                        Text("Create")
-                    }
+                    val buttonWidth = 100.dp
+                    CreateButton(buttonWidth, CreateWeeklyListScreenClick)
                 }
             },
             floatingActionButton = {
@@ -250,4 +246,17 @@ fun LogoutButton(viewModel: LoginViewModel) {
     }
 }
 
-
+@Composable
+fun CreateButton(buttonWidth: Dp, CreateWeeklyListClick: () -> Unit) {
+    OutlinedButton(
+        onClick = { CreateWeeklyListClick() },
+        modifier = Modifier.width(buttonWidth),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(com.example.todolist_app_project.R.color.black),
+            contentColor = colorResource(com.example.todolist_app_project.R.color.white)
+        )
+    )
+    {
+        Text("Create")
+    }
+}

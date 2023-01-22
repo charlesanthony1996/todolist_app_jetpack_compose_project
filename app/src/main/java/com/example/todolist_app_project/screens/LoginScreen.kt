@@ -107,7 +107,7 @@ import com.google.firebase.ktx.Firebase
 private const val TAG = "LoginScreen"
 
 @Composable
-fun LoginScreen(emailLoginClick: () -> Unit,guestLoginClick: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(emailLoginClick: () -> Unit, guestLoginClick: () -> Unit, viewModel: LoginViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
