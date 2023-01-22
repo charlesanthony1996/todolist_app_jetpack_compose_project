@@ -75,8 +75,29 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                                     Icon(
                                         Icons.Outlined.AccountCircle,
                                         contentDescription = "User profile picture",
-
+                                        modifier = Modifier.size(50.dp)
                                     )
+                                }
+                                Divider()
+                                Spacer(modifier = Modifier.fillMaxWidth())
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Yearly Balance")
+                                }
+                                Divider()
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end= 0.dp
+                                    ),
+                                modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Goals")
                                 }
                             }
             },
