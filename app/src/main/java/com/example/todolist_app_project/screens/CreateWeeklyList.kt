@@ -120,7 +120,7 @@ fun AddItemForm() {
         Button(onClick = {
             val db = FirebaseFirestore.getInstance()
             db.collection("items")
-                .add(mapOf("name" to itemName.value, "price" to itemPrice.value.toDouble()))
+                .add(mapOf("item_name" to itemName.value, "item_price" to itemPrice.value))
                 .addOnSuccessListener {
                     // Clear the form after successful submission
                     itemName.value = ""
