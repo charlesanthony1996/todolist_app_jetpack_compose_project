@@ -19,6 +19,7 @@ private const val TAG = "LoginViewModel"
 
 @HiltViewModel
 class LoginViewModel @Inject constructor() : ViewModel() {
+
     private val _isLoggedIn = mutableStateOf(false)
     val isLoggedIn: State<Boolean> = _isLoggedIn
 
@@ -131,7 +132,13 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     }
 
     fun goToCreateWeeklyList() = viewModelScope.launch {
-        _isLoggedIn.value = true
+
+        if (_isLoggedIn.value) {
+            NavigationEnum.CreateWeeklyList.title
+        }
+        else {
+            NavigationEnum.CreateWeeklyList.title
+        }
 
     }
 }

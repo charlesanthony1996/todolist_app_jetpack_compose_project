@@ -31,9 +31,8 @@ enum class NavigationEnum (val title: Int) {
                     Welcome.name -> Welcome
                     Login.name -> Welcome
                     EmailLogin.name -> Welcome
-//                    CreateWeeklyList.name -> CreateWeeklyList
+                    CreateWeeklyList.name -> CreateWeeklyList
                     null -> Welcome
-//                    CreateWeeklyList.name -> CreateWeeklyList
 
                     else -> throw IllegalArgumentException("Route $route is not recognized.")
                 }

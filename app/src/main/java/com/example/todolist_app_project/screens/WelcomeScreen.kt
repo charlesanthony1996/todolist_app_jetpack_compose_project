@@ -155,10 +155,18 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
             },
             bottomBar = {
                 BottomAppBar{
+                    Button (
+                        onClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
+                        modifier= Modifier
+                            .width(50.dp)
+                            .height(50.dp),
+                            ){
+                        Text("Create")
+                    }
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick= { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
+                FloatingActionButton(onClick= { viewModel.goToCreateWeeklyList() },
                     modifier= Modifier.padding(0.dp),
                 ) {
                     Icon(
