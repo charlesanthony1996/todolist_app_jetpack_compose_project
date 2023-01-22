@@ -158,7 +158,7 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                     Button (
                         onClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
                         modifier= Modifier
-                            .width(50.dp)
+                            .width(100.dp)
                             .height(50.dp),
                             ){
                         Text("Create")
