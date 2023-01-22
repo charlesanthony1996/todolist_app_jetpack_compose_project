@@ -83,5 +83,8 @@ dependencies {
 
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
 
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+
+
 
 }
