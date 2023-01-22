@@ -36,7 +36,7 @@ import com.example.todolist_app_project.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
+fun CreateWeeklyListScreen() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 

@@ -28,6 +28,7 @@ import com.example.todolist_app_project.screens.LoginScreen
 import com.example.todolist_app_project.screens.WelcomeScreen
 import com.example.todolist_app_project.ui.theme.NavigationTheme
 import com.example.todolist_app_project.R
+import com.example.todolist_app_project.screens.CreateWeeklyListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +85,7 @@ fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: Logi
         loginPage(this, navController, loginViewModel)
         emailLoginPage(this, loginViewModel)
         welcomePage(this, loginViewModel)
+        createWeeklyListPage(this)
     }
 }
 
@@ -108,5 +110,11 @@ fun emailLoginPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
 fun welcomePage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
     builder.composable(route = NavigationEnum.Welcome.name) {
         WelcomeScreen(loginViewModel)
+    }
+}
+
+fun createWeeklyListPage(builder: NavGraphBuilder) {
+    builder.composable(route = NavigationEnum.CreateWeeklyList.name) {
+        CreateWeeklyListScreen()
     }
 }

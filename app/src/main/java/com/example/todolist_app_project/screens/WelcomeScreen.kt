@@ -55,8 +55,9 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                         Icon(
                             Icons.Filled.Menu,
                             contentDescription = "Menu",
-                            modifier = Modifier.size(ButtonDefaults.IconSize)
-                                .clickable(onClick= {
+                            modifier = Modifier
+                                .size(ButtonDefaults.IconSize)
+                                .clickable(onClick = {
                                     scope.launch {
                                         scaffoldState.drawerState.apply {
                                             if (isClosed) open() else close()
@@ -139,6 +140,17 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                                 ) {
                                     Text("About")
                                 }
+                                Divider()
+                                Button(
+                                    onClick = { viewModel.signOut() },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Logout")
+                                }
+
                             }
             },
             bottomBar = {
@@ -196,7 +208,12 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                 }
             }
         }
+//        Button(onClick = { viewModel.signOut() }) {
+//            Text(text = "Log out")
+//        }
+//        LogoutButton(viewModel)
     }
+//    LogoutButton(viewModel)
 }
 
 

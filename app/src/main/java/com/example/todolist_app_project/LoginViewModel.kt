@@ -131,14 +131,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     }
 
     fun goToCreateWeeklyList() = viewModelScope.launch {
+        _isLoggedIn.value = true
 
     }
-
-//    val navController = rememberNavController()
-//    fun navigateTo(destination: NavigationEnum) {
-//        when (destination) {
-//            NavigationEnum.CreateWeeklyList -> navController.navigate(R.string.create_weekly_list)
-//
-//        }
-//    }
 }
