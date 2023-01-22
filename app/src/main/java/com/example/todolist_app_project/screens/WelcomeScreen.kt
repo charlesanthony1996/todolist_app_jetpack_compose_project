@@ -87,7 +87,7 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                                     ),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text("Yearly Balance")
+                                    Text("Profile")
                                 }
                                 Divider()
                                 Button(
@@ -97,7 +97,47 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                                     ),
                                 modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text("Goals")
+                                    Text("My items")
+                                }
+                                Divider()
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Overview")
+                                }
+                                Divider()
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("External links")
+                                }
+                                Divider()
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Configuration")
+                                }
+                                Divider()
+                                Button(
+                                    onClick = { /* */ },
+                                    contentPadding = PaddingValues(
+                                        start = 0.dp, end = 0.dp
+                                    ),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("About")
                                 }
                             }
             },
