@@ -22,6 +22,7 @@ enum class NavigationEnum (val title: Int) {
                 when (route?.substringBefore("/")) {
                     Login.name -> Login
                     EmailLogin.name -> EmailLogin
+                    CreateWeeklyList.name -> CreateWeeklyList
                     else -> Login // Redirects to Login if some other page, but not logged in
                 }
             } else {
@@ -30,8 +31,9 @@ enum class NavigationEnum (val title: Int) {
                     Welcome.name -> Welcome
                     Login.name -> Welcome
                     EmailLogin.name -> Welcome
+                    CreateWeeklyList.name -> CreateWeeklyList
                     null -> Welcome
-                    null -> CreateWeeklyList
+
                     else -> throw IllegalArgumentException("Route $route is not recognized.")
                 }
             }

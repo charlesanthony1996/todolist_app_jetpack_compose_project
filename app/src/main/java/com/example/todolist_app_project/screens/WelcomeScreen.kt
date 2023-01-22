@@ -146,7 +146,7 @@ fun WelcomeScreen(viewModel: LoginViewModel) {
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick= { /* */},
+                FloatingActionButton(onClick= { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
                     modifier= Modifier.padding(0.dp),
                 ) {
                     Icon(

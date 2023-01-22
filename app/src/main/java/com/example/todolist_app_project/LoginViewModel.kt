@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.compose.rememberNavController
 //import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
@@ -133,6 +134,11 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     }
 
-
-
+//    val navController = rememberNavController()
+//    fun navigateTo(destination: NavigationEnum) {
+//        when (destination) {
+//            NavigationEnum.CreateWeeklyList -> navController.navigate(R.string.create_weekly_list)
+//
+//        }
+//    }
 }
