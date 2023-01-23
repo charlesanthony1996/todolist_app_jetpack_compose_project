@@ -46,10 +46,12 @@ fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     val backstackEntry = navController.currentBackStackEntryAsState()
 
     val currentScreen = NavigationEnum.fromRoute(backstackEntry.value?.destination?.route, loginViewModel.isLoggedIn)
-    Scaffold(
-        topBar = { TopBar(navController, currentScreen) }
-    ) {
-        NavigateBetweenScreen(navController)
+    NavigationTheme {
+        Scaffold(
+            topBar = { TopBar(navController, currentScreen) }
+        ) {
+            NavigateBetweenScreen(navController)
+        }
     }
 }
 

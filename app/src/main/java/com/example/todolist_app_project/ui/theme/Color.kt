@@ -2,9 +2,9 @@ package com.example.todolist_app_project.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
+val grey_light = Color(0xFF7F8997)
+val grey_dark = Color(0xFF676B70)
+val grey = Color(0xFFCDCDCD)
 val Teal200 = Color(0xFF03DAC5)
 var black = Color(0xFFFFFFF)
 var white = Color(0x000000)
