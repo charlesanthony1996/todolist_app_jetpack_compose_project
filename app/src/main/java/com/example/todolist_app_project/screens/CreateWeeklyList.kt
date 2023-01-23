@@ -106,28 +106,44 @@ fun AddItemForm() {
     val itemName = remember { mutableStateOf("") }
     val itemPrice = remember { mutableStateOf("") }
 
-    Column {
-        TextField(
-            value = itemName.value,
-            onValueChange = { itemName.value = it },
-            label = { Text("Item Name") }
-        )
-        TextField(
-            value = itemPrice.value,
-            onValueChange = { itemPrice.value = it },
-            label = { Text("Item Price") }
-        )
-        Button(onClick = {
-            val db = FirebaseFirestore.getInstance()
-            db.collection("items")
-                .add(mapOf("item_name" to itemName.value, "item_price" to itemPrice.value))
-                .addOnSuccessListener {
-                    // Clear the form after successful submission
-                    itemName.value = ""
-                    itemPrice.value = ""
-                }
-        }) {
-            Text("Submit")
+    Row() {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Column() {
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                modifier = Modifier.width(150.dp).padding(0.dp),
+                value = itemName.value,
+                onValueChange = { itemName.value = it },
+                label = { Text("Item Name") }
+            )
+        }
+        Spacer(modifier = Modifier.width(10.dp))
+        Column() {
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                modifier = Modifier.width(140.dp),
+                value = itemPrice.value,
+                onValueChange = { itemPrice.value = it },
+                label = { Text("Item Price") }
+            )
+        }
+        Spacer(modifier = Modifier.width(5.dp))
+
+        Column() {
+            Spacer(modifier = Modifier.height(10.dp))
+            Button(onClick = {
+                val db = FirebaseFirestore.getInstance()
+                db.collection("items")
+                    .add(mapOf("item_name" to itemName.value, "item_price" to itemPrice.value))
+                    .addOnSuccessListener {
+                        // Clear the form after successful submission
+                        itemName.value = ""
+                        itemPrice.value = ""
+                    }
+            }) {
+                Text("Submit")
+            }
         }
     }
 }
