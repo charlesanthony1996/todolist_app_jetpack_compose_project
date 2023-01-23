@@ -37,6 +37,7 @@ import com.example.todolist_app_project.NavigationEnum
 import com.example.todolist_app_project.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import androidx.compose.material.ListItem
 
 @Composable
 fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
@@ -112,7 +113,9 @@ fun AddItemForm() {
         Column() {
             Spacer(modifier = Modifier.height(10.dp))
             TextField(
-                modifier = Modifier.width(150.dp).padding(0.dp),
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(0.dp),
                 value = itemName.value,
                 onValueChange = { itemName.value = it },
                 label = { Text("Item Name") }
@@ -147,3 +150,59 @@ fun AddItemForm() {
         }
     }
 }
+
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ItemList() {
+    val items = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
+
+    FirebaseFirestore.getInstance()
+        .collection("items")
+        .get()
+        .addOnSuccessListener { snapshot ->
+            items.value = snapshot.documents.map { it.data as Map<String, Any> }
+        }
+
+    Column {
+        AddItemForm()
+        items.value.forEach { item ->
+            ListItem(
+                text = { Text("${item["item_name"]} - ${item["item_price"]}")},
+                modifier = Modifier.padding(10.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun ClearCompleteList() {
+    val items = remember { }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
