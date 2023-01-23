@@ -27,4 +27,5 @@
 <!--    sign up screen-->
     <string name="home">Home</string>
     <string name="signup">Signup</string>
+    <string name="landing">Landing</string>
 </resources>

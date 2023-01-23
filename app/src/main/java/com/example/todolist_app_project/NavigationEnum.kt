@@ -3,8 +3,8 @@ package com.example.todolist_app_project
 import androidx.compose.runtime.State
 
 enum class NavigationEnum (val title: Int) {
-    Home (
-        title = R.string.home
+    Landing (
+        title = R.string.landing
             ),
     Login(
         title = R.string.login
@@ -13,10 +13,10 @@ enum class NavigationEnum (val title: Int) {
         title = R.string.signup
     ),
     EmailLogin(
-        title = R.string.sign_in_with_email
+        title = R.string.email
     ),
-    Welcome(
-        title = R.string.welcome
+    Home(
+        title = R.string.home
     ),
     CreateWeeklyList(
         title = R.string.create_weekly_list
@@ -26,21 +26,24 @@ enum class NavigationEnum (val title: Int) {
         fun fromRoute(route: String?, isLoggedIn: State<Boolean>): NavigationEnum {
             return if (!isLoggedIn.value) {
                 when (route?.substringBefore("/")) {
-                    Home.name -> Home
                     Login.name -> Login
+                    Landing.name -> Landing
                     Signup.name -> Signup
                     EmailLogin.name -> EmailLogin
+                    Home.name -> Home
                     CreateWeeklyList.name -> CreateWeeklyList
                     else -> Login // Redirects to Login if some other page, but not logged in
                 }
             } else {
                 // Define here all your logged in routes
                 when (route?.substringBefore("/")) {
-                    Welcome.name -> Welcome
-                    Login.name -> Welcome
-                    EmailLogin.name -> Welcome
-                    CreateWeeklyList.name -> CreateWeeklyList
-                    null -> Welcome
+                    Landing.name -> Home
+                    Login.name -> Home
+                    Signup.name -> Home
+                    EmailLogin.name -> Home
+                    CreateWeeklyList.name -> Home
+
+                    null -> Home
 
                     else -> throw IllegalArgumentException("Route $route is not recognized.")
                 }

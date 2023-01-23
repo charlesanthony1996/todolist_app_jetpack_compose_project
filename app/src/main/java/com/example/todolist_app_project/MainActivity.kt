@@ -3,7 +3,6 @@ package com.example.todolist_app_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 //import androidx.compose.material.R
 import androidx.compose.material.icons.Icons
@@ -13,23 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.todolist_app_project.NavigationEnum
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.todolist_app_project.screens.EmailLoginScreen
-import com.example.todolist_app_project.screens.LoginScreen
-import com.example.todolist_app_project.screens.WelcomeScreen
+import com.example.todolist_app_project.screens.*
 import com.example.todolist_app_project.ui.theme.NavigationTheme
-import com.example.todolist_app_project.R
-import com.example.todolist_app_project.screens.CreateWeeklyListScreen
-import kotlin.math.log
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +52,8 @@ fun TopBar(navController: NavHostController, currentScreen: NavigationEnum) {
         title = { Text(text = stringResource(currentScreen.title)) },
         // To avoid going back to previous screen after login/logout click
         navigationIcon = {
-            if (currentScreen != NavigationEnum.Welcome
-                && currentScreen != NavigationEnum.Login
+            if (currentScreen != NavigationEnum.Home
+                && currentScreen != NavigationEnum.EmailLogin
             ) {
                 NavigateBackButton(navController)
             }
@@ -81,14 +72,25 @@ fun NavigateBackButton(navController: NavHostController) {
 
 @Composable
 fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: LoginViewModel = hiltViewModel()) {
-    val startDestination = if (loginViewModel.isLoggedIn.value) NavigationEnum.Welcome.name else NavigationEnum.Home.name
+    val startDestination = if (loginViewModel.isLoggedIn.value) NavigationEnum.Home.name else NavigationEnum.Signup.name
 
     NavHost(navController = navController, startDestination = startDestination) {
         // TODO viewModels() di doesn't work inside this anymore, every page creates with it own lifecycle
+        landingPage(this, navController, loginViewModel)
         loginPage(this, navController, loginViewModel)
         emailLoginPage(this, loginViewModel)
-        welcomePage(this, navController, loginViewModel)
+        signupPage(this, loginViewModel)
+        Homepage(this, navController, loginViewModel)
         createWeeklyListPage(this,navController, loginViewModel)
+    }
+}
+fun landingPage(builder: NavGraphBuilder, navController: NavHostController,loginViewModel: LoginViewModel) {
+    builder.composable(route = NavigationEnum.Landing.name) {
+        LandingScreen(
+            LoginButtonClick = { navController.navigate(NavigationEnum.Login.name)},
+            GetStartedButtonClick = { navController.navigate(NavigationEnum.Signup.name)},
+            viewModel = loginViewModel
+        )
     }
 }
 
@@ -110,8 +112,14 @@ fun emailLoginPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
     }
 }
 
-fun welcomePage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
-    builder.composable(route = NavigationEnum.Welcome.name) {
+fun signupPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
+    builder.composable(route = NavigationEnum.Signup.name) {
+        SignupScreen(loginViewModel)
+    }
+}
+
+fun Homepage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
+    builder.composable(route = NavigationEnum.Home.name) {
         WelcomeScreen(
             CreateWeeklyListScreenClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
             loginViewModel
@@ -124,3 +132,6 @@ fun createWeeklyListPage(builder: NavGraphBuilder, navController: NavHostControl
         CreateWeeklyListScreen(loginViewModel)
     }
 }
+
+
+
