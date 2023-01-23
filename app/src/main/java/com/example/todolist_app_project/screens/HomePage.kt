@@ -10,22 +10,16 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.todolist_app_project.LoginViewModel
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
-    var isDrawerOpen = false
-    val navController = rememberNavController()
-
+fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -34,8 +28,9 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
             scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar {
-                    Button(onClick = { /* */ },
-                    contentPadding = PaddingValues(start=0.dp, end=0.dp)
+                    Button(
+                        onClick = {},
+                        contentPadding = PaddingValues(start = 0.dp, end = 0.dp)
                     ) {
                         Icon(
                             Icons.Filled.Menu,
@@ -53,100 +48,97 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
                     }
                 }
             },
-//            drawer content here
             drawerContent = {
-                            Column{
-                                Card(modifier = Modifier.fillMaxWidth(),)
-                                {
-                                    Icon(
-                                        Icons.Outlined.AccountCircle,
-                                        contentDescription = "User profile picture",
-                                        modifier = Modifier.size(50.dp)
-                                    )
-                                }
-                                Divider()
-                                Spacer(modifier = Modifier.fillMaxWidth())
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("Profile")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end= 0.dp
-                                    ),
-                                modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("My items")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("Overview")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("External links")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("Configuration")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { /* */ },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("About")
-                                }
-                                Divider()
-                                Button(
-                                    onClick = { viewModel.signOut() },
-                                    contentPadding = PaddingValues(
-                                        start = 0.dp, end = 0.dp
-                                    ),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Text("Logout")
-                                }
-
-                            }
+                Column {
+                    Card(modifier = Modifier.fillMaxWidth())
+                    {
+                        Icon(
+                            Icons.Outlined.AccountCircle,
+                            contentDescription = "User profile picture",
+                            modifier = Modifier.size(50.dp)
+                        )
+                    }
+                    Divider()
+                    Spacer(modifier = Modifier.fillMaxWidth())
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Profile")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("My items")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Overview")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("External links")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Configuration")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { /* */ },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("About")
+                    }
+                    Divider()
+                    Button(
+                        onClick = { viewModel.signOut() },
+                        contentPadding = PaddingValues(
+                            start = 0.dp, end = 0.dp
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text("Logout") }
+                }
             },
             bottomBar = {
-                BottomAppBar{
+                BottomAppBar {
                     val buttonWidth = 100.dp
                     CreateButton(buttonWidth, CreateWeeklyListScreenClick)
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick= { /**/ },
-                    modifier= Modifier.padding(0.dp),
+                FloatingActionButton(
+                    onClick = {},
+                    modifier = Modifier.padding(0.dp),
                 ) {
                     Icon(
                         Icons.Filled.Add,
@@ -158,14 +150,15 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
             floatingActionButtonPosition = FabPosition.Center
 
         ) {
-            Card(modifier = Modifier
-                .height(100.dp)
-                .width(500.dp)
-                .border(1.dp, MaterialTheme.colors.onSecondary)
-                .padding(0.dp),
-            elevation = 10.dp) {
-                Column (
-//                    your card content here
+            Card(
+                modifier = Modifier
+                    .height(100.dp)
+                    .width(500.dp)
+                    .border(1.dp, MaterialTheme.colors.onSecondary)
+                    .padding(0.dp),
+                elevation = 10.dp
+            ) {
+                Column(
                     modifier = Modifier.padding(0.dp)
                 ) {
                     Text(
@@ -177,12 +170,14 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
             }
             Spacer(modifier = Modifier.height(20.dp))
 
-            Card(modifier = Modifier
-                .height(200.dp)
-                .width(500.dp)
-                .border(1.dp, MaterialTheme.colors.onSecondary)
-                .padding(top = 100.dp),
-                elevation = 10.dp) {
+            Card(
+                modifier = Modifier
+                    .height(200.dp)
+                    .width(500.dp)
+                    .border(1.dp, MaterialTheme.colors.onSecondary)
+                    .padding(top = 100.dp),
+                elevation = 10.dp
+            ) {
                 Column(
 //                    your card content here
                     modifier = Modifier.padding(0.dp)
@@ -195,37 +190,6 @@ fun WelcomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewM
                     Text("See details")
                 }
             }
-        }
-//        Button(onClick = { viewModel.signOut() }) {
-//            Text(text = "Log out")
-//        }
-//        LogoutButton(viewModel)
-    }
-//    LogoutButton(viewModel)
-}
-
-
-@Composable
-fun WelcomeText() {
-    Text(
-        text = "You are logged in",
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.h4
-    )
-}
-
-
-@Composable
-fun LogoutButton(viewModel: LoginViewModel) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 40.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(onClick = { viewModel.signOut() }) {
-            Text(text = "Log out")
         }
     }
 }

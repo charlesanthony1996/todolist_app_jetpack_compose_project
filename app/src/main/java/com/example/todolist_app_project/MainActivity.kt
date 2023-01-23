@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
-//import androidx.compose.material.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.todolist_app_project.screens.*
 import com.example.todolist_app_project.ui.theme.NavigationTheme
+import  com.example.todolist_app_project.screens.TopBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,10 @@ fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     val navController = rememberNavController()
     val backstackEntry = navController.currentBackStackEntryAsState()
 
-    val currentScreen = NavigationEnum.fromRoute(backstackEntry.value?.destination?.route, loginViewModel.isLoggedIn)
+    val currentScreen = NavigationEnum.fromRoute(
+        backstackEntry.value?.destination?.route,
+        loginViewModel.isLoggedIn
+    )
     NavigationTheme {
         Scaffold(
             topBar = { TopBar(navController, currentScreen) }
@@ -46,15 +49,17 @@ fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     }
 }
 
-@Composable
+/*@Composable
 fun TopBar(navController: NavHostController, currentScreen: NavigationEnum) {
     TopAppBar(
         title = { Text(text = stringResource(currentScreen.title)) },
         // To avoid going back to previous screen after login/logout click
         navigationIcon = {
             println("$currentScreen")
-            if (currentScreen != NavigationEnum.Home && currentScreen != NavigationEnum.Landing ) {
+            if (currentScreen != NavigationEnum.Home && currentScreen != NavigationEnum.Landing) {
                 NavigateBackButton(navController)
+            } else if (currentScreen == NavigationEnum.Home) {
+
             }
         }
     )
@@ -67,11 +72,15 @@ fun NavigateBackButton(navController: NavHostController) {
 
         Icon(Icons.Filled.ArrowBack, stringResource(R.string.back_icon))
     }
-}
+}*/
 
 @Composable
-fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: LoginViewModel = hiltViewModel()) {
-    val startDestination = if (loginViewModel.isLoggedIn.value) NavigationEnum.Home.name else NavigationEnum.Landing.name
+fun NavigateBetweenScreen(
+    navController: NavHostController,
+    loginViewModel: LoginViewModel = hiltViewModel()
+) {
+    val startDestination =
+        if (loginViewModel.isLoggedIn.value) NavigationEnum.Home.name else NavigationEnum.Landing.name
 
     NavHost(navController = navController, startDestination = startDestination) {
         // TODO viewModels() di doesn't work inside this anymore, every page creates with it own lifecycle
@@ -79,26 +88,35 @@ fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: Logi
         loginPage(this, navController, loginViewModel)
         emailLoginPage(this, loginViewModel)
         signupPage(this, loginViewModel)
-        Homepage(this, navController, loginViewModel)
-        createWeeklyListPage(this,navController, loginViewModel)
+        homePage(this, navController, loginViewModel)
+        createWeeklyListPage(this, navController, loginViewModel)
     }
 }
-fun landingPage(builder: NavGraphBuilder, navController: NavHostController,loginViewModel: LoginViewModel) {
+
+fun landingPage(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    loginViewModel: LoginViewModel
+) {
     builder.composable(route = NavigationEnum.Landing.name) {
         LandingScreen(
-            LoginButtonClick = { navController.navigate(NavigationEnum.Login.name)},
-            GetStartedButtonClick = { navController.navigate(NavigationEnum.Signup.name)},
+            LoginButtonClick = { navController.navigate(NavigationEnum.Login.name) },
+            GetStartedButtonClick = { navController.navigate(NavigationEnum.Signup.name) },
             viewModel = loginViewModel
         )
     }
 }
 
-fun loginPage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
+fun loginPage(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    loginViewModel: LoginViewModel
+) {
     builder.composable(route = NavigationEnum.Login.name) {
         loginViewModel.setError("")
         LoginScreen(
             emailLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
-            guestLoginClick = {navController.navigate(NavigationEnum.EmailLogin.name)},
+            guestLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
             viewModel = loginViewModel
         )
     }
@@ -117,16 +135,24 @@ fun signupPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
     }
 }
 
-fun Homepage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
+fun homePage(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    loginViewModel: LoginViewModel
+) {
     builder.composable(route = NavigationEnum.Home.name) {
-        WelcomeScreen(
-            CreateWeeklyListScreenClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name)},
+        HomeScreen(
+            CreateWeeklyListScreenClick = { navController.navigate(NavigationEnum.CreateWeeklyList.name) },
             loginViewModel
         )
     }
 }
 
-fun createWeeklyListPage(builder: NavGraphBuilder, navController: NavHostController, loginViewModel: LoginViewModel) {
+fun createWeeklyListPage(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    loginViewModel: LoginViewModel
+) {
     builder.composable(route = NavigationEnum.CreateWeeklyList.name) {
         CreateWeeklyListScreen(loginViewModel)
     }
