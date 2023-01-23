@@ -45,65 +45,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-//@Composable
-//fun LoginScreen(navController: NavController) {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(Color.White),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        val buttonWidth = 300.dp
-//
-//        Spacer(modifier = Modifier.height(18.dp))
-//
-//        if (viewModel.error.value.isNotBlank()) {
-//            ErrorField(viewModel)
-//        }
-//        SignInWithEmailButton(buttonWidth, emailLoginClick)
-////        SignInWithGoogleButton(buttonWidth, viewModel)
-//    }
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(0.dp),
-//            horizontalArrangement = Arrangement.Center
-//        ) {
-//            Icon(
-//                Icons.Filled.Person,
-//                contentDescription = "Person",
-//                modifier = Modifier.size(ButtonDefaults.IconSize)
-//            )
-//        }
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(10.dp),
-//            horizontalArrangement = Arrangement.Center
-//        ) {
-//            Button(
-//                shape = MaterialTheme.shapes.medium,
-//                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
-//                modifier = Modifier.padding(5.dp),
-//                onClick = {
-//
-//                    navController.navigate(Screens.Home.route)
-//                }
-//            ) {
-//                Text(
-//                    text = "Go to Home Screen",
-//                    modifier = Modifier.padding(5.dp),
-//                    style = MaterialTheme.typography.button.copy(
-//                        fontWeight = FontWeight.Bold,
-//                        color = Color.White
-//                    )
-//                )
-//            }
-//        }
-//    }
-//}
-
 private const val TAG = "LoginScreen"
 
 @Composable

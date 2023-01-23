@@ -52,9 +52,8 @@ fun TopBar(navController: NavHostController, currentScreen: NavigationEnum) {
         title = { Text(text = stringResource(currentScreen.title)) },
         // To avoid going back to previous screen after login/logout click
         navigationIcon = {
-            if (currentScreen != NavigationEnum.Home
-                && currentScreen != NavigationEnum.EmailLogin
-            ) {
+            println("$currentScreen")
+            if (currentScreen != NavigationEnum.Home && currentScreen != NavigationEnum.Landing ) {
                 NavigateBackButton(navController)
             }
         }

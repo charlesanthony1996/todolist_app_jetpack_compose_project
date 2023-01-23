@@ -24,7 +24,17 @@ enum class NavigationEnum (val title: Int) {
 
     companion object {
         fun fromRoute(route: String?, isLoggedIn: State<Boolean>): NavigationEnum {
-            return if (!isLoggedIn.value) {
+
+            return when (route?.substringBefore("/")) {
+                Login.name -> Login
+                Landing.name -> Landing
+                Signup.name -> Signup
+                EmailLogin.name -> EmailLogin
+                Home.name -> Home
+                CreateWeeklyList.name -> CreateWeeklyList
+                else -> Login // Redirects to Login if some other page, but not logged in
+            }
+            /*return if (!isLoggedIn.value) {
                 when (route?.substringBefore("/")) {
                     Login.name -> Login
                     Landing.name -> Landing
@@ -48,7 +58,7 @@ enum class NavigationEnum (val title: Int) {
 
                     else -> throw IllegalArgumentException("Route $route is not recognized.")
                 }
-            }
+            }*/
         }
 
         fun toRoute(route: String?, isLoggedIn: State<Boolean>) {
