@@ -42,6 +42,7 @@ enum class NavigationEnum (val title: Int) {
                     Signup.name -> Home
                     EmailLogin.name -> Home
                     CreateWeeklyList.name -> Home
+                    Home.name -> Home
 
                     null -> Home
 
