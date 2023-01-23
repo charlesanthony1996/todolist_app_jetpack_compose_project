@@ -72,7 +72,7 @@ fun NavigateBackButton(navController: NavHostController) {
 
 @Composable
 fun NavigateBetweenScreen(navController: NavHostController, loginViewModel: LoginViewModel = hiltViewModel()) {
-    val startDestination = if (loginViewModel.isLoggedIn.value) NavigationEnum.Home.name else NavigationEnum.Signup.name
+    val startDestination = if (loginViewModel.isLoggedIn.value) NavigationEnum.Home.name else NavigationEnum.Landing.name
 
     NavHost(navController = navController, startDestination = startDestination) {
         // TODO viewModels() di doesn't work inside this anymore, every page creates with it own lifecycle

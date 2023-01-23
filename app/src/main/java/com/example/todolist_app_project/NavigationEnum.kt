@@ -5,7 +5,7 @@ import androidx.compose.runtime.State
 enum class NavigationEnum (val title: Int) {
     Landing (
         title = R.string.landing
-            ),
+    ),
     Login(
         title = R.string.login
     ),
