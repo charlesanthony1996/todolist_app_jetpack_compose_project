@@ -20,6 +20,9 @@ enum class NavigationEnum (val title: Int) {
     ),
     CreateWeeklyList(
         title = R.string.create_weekly_list
+    ),
+    ManualEntry(
+        title = R.string.create_manual_entry
     );
 
     companion object {
@@ -32,6 +35,7 @@ enum class NavigationEnum (val title: Int) {
                 EmailLogin.name -> EmailLogin
                 Home.name -> Home
                 CreateWeeklyList.name -> CreateWeeklyList
+                ManualEntry.name -> ManualEntry
                 else -> Login // Redirects to Login if some other page, but not logged in
             }
             /*return if (!isLoggedIn.value) {

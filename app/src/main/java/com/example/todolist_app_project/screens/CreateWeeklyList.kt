@@ -44,7 +44,7 @@ import com.google.firebase.ktx.Firebase
 
 
 @Composable
-fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
+fun CreateWeeklyListScreen(viewModel: LoginViewModel,CreateManualEntryClick: () -> Unit) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -59,7 +59,7 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
         AddItemForm()
         ItemList()
         ClearCompleteList()
-        CreateManualEntryButton(viewModel)
+        CreateManualEntryButton(CreateManualEntryClick)
     }
 //        Scaffold(
 //            scaffoldState = scaffoldState,
@@ -241,9 +241,9 @@ fun ShowItemsByLoggedInUser() {
 
 
 @Composable
-fun CreateManualEntryButton(viewModel: LoginViewModel) {
+fun CreateManualEntryButton(CreateManualEntryClick: () -> Unit) {
     Button(
-        onClick = { /* */ },
+        onClick = { CreateManualEntryClick() },
         modifier = Modifier
             .width(200.dp)
             .height(50.dp),

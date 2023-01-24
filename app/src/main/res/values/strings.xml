@@ -30,4 +30,7 @@
     <string name="home">Home</string>
     <string name="signup">Signup</string>
     <string name="landing">Landing</string>
+
+<!--    create manual entry list-->
+    <string name="create_manual_entry">Create Manual Entry</string>
 </resources>

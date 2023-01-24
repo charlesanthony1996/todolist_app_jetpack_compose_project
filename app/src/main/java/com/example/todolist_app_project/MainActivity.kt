@@ -199,6 +199,7 @@ fun NavigateBetweenScreen(
         signupPage(this, loginViewModel)
         homePage(this, navController, loginViewModel)
         createWeeklyListPage(this, navController, loginViewModel)
+        createManualEntryPage(this, loginViewModel)
     }
 }
 
@@ -263,7 +264,21 @@ fun createWeeklyListPage(
     loginViewModel: LoginViewModel
 ) {
     builder.composable(route = NavigationEnum.CreateWeeklyList.name) {
-        CreateWeeklyListScreen(loginViewModel)
+        CreateWeeklyListScreen(
+            CreateManualEntryClick = { navController.navigate(NavigationEnum.ManualEntry.name)},
+            viewModel = loginViewModel
+        )
+    }
+}
+
+fun createManualEntryPage(
+    builder:NavGraphBuilder,
+    loginViewModel: LoginViewModel
+) {
+    builder.composable(route = NavigationEnum.ManualEntry.name) {
+        CreateManualEntryScreen(
+            loginViewModel
+        )
     }
 }
 
