@@ -60,6 +60,7 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel,CreateManualEntryClick: () 
     {
         AddItemForm()
         ItemList()
+//        ShowTotalField()
         ClearCompleteList()
         CreateManualEntryButton(CreateManualEntryClick)
     }
@@ -207,12 +208,31 @@ fun ItemList() {
             ListItem(
                 text = { Text("${item["item_name"]} - ${item["item_price"]}",
                     fontSize = 25.sp)},
-                modifier = Modifier.width(200.dp).height(50.dp)
+                modifier = Modifier
+                    .width(200.dp)
+                    .height(50.dp)
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ShowTotalField() {
+    val totalPrice = remember { mutableStateOf(0.0) }
+
+    FirebaseFirestore.getInstance()
+        .collection("items")
+        .get()
+        .addOnSuccessListener { snapshot ->
+            totalPrice.value = snapshot.documents.sumOf {
+                it.getDouble("item_price") ?: 0.0
+            }
+        }
+
+    Text("Total Price: $totalPrice", fontSize = 20.sp)
+
+}
 
 @Composable
 fun ClearCompleteList() {
@@ -259,6 +279,7 @@ fun CreateManualEntryButton(CreateManualEntryClick: () -> Unit) {
         content ={ Text("Create Manual Entry")}
     )
 }
+
 
 
 
