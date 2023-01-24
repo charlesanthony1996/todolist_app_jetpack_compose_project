@@ -38,6 +38,9 @@ import com.example.todolist_app_project.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import androidx.compose.material.ListItem
+import com.google.common.base.Functions.compose
+import com.google.firebase.ktx.Firebase
+
 
 @Composable
 fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
@@ -61,6 +64,8 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
 
         ) {
             AddItemForm()
+            ItemList()
+            ClearCompleteList()
 
 
 //            firebase addition
@@ -178,11 +183,20 @@ fun ItemList() {
 
 @Composable
 fun ClearCompleteList() {
-    val items = remember { }
+    val db = FirebaseFirestore.getInstance()
+    val itemsRef = db.collection("items")
 
+    Button(onClick = {
+        itemsRef.get().addOnSuccessListener { snapshot ->
+            for (document in snapshot.documents) {
+                document.reference.delete()
+            }
+        }
+    })
+    {
+        Text("Delete list")
+    }
 }
-
-
 
 
 
