@@ -38,11 +38,11 @@ fun EmailLoginScreen(viewModel: LoginViewModel) {
 
 @Composable
 fun NameField(viewModel: LoginViewModel) {
-    val userPassword = viewModel.name.value
+    val userName = viewModel.name.value
 
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
-        value = userPassword,
+        value = userName,
         label = { Text(text = stringResource(R.string.name)) },
         onValueChange = { viewModel.setUserName(it) }
     )
