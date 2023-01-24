@@ -36,6 +36,9 @@ fun SignupScreen(viewModel: LoginViewModel) {
 
 //        add composable functions here
         NameFieldElement(viewModel)
+        EmailFieldElement(viewModel)
+        CreateSignupButton(viewModel)
+
 
     }
 
@@ -46,11 +49,25 @@ fun SignupScreen(viewModel: LoginViewModel) {
 fun NameFieldElement(viewModel: LoginViewModel) {
     val userPassword = viewModel.name.value
 
+    Text("Username")
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = userPassword,
         label = { Text(text = stringResource(R.string.name)) },
         onValueChange = { viewModel.setUserName(it) }
+    )
+}
+
+@Composable
+fun EmailFieldElement(viewModel: LoginViewModel) {
+    val userEmail = viewModel.userEmail.value
+
+    Text("Email")
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = userEmail,
+        label = { Text(text = stringResource(R.string.email)) },
+        onValueChange = { viewModel.setUserEmail(it) }
     )
 }
 
