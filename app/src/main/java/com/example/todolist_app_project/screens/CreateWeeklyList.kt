@@ -56,7 +56,9 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
     )
     {
         AddItemForm()
+        ItemList()
         ClearCompleteList()
+        CreateManualEntryButton(viewModel)
     }
 //        Scaffold(
 //            scaffoldState = scaffoldState,
@@ -193,12 +195,13 @@ fun ItemList() {
 //        AddItemForm()
         items.value.forEach { item ->
             ListItem(
-                text = { Text("${item["item_name"]} - ${item["item_price"]}")},
-                modifier = Modifier.padding(10.dp)
+                text = { Text("${item["item_name"]} - ${item["item_price"]}") },
+                modifier = Modifier.width(200.dp).height(50.dp)
             )
         }
     }
 }
+
 
 @Composable
 fun ClearCompleteList() {
@@ -234,6 +237,17 @@ fun ShowItemsByLoggedInUser() {
 
 }
 
+
+@Composable
+fun CreateManualEntryButton(viewModel: LoginViewModel) {
+    Button(
+        onClick = { /* */ },
+        modifier = Modifier
+            .width(200.dp)
+            .height(50.dp),
+        content ={ Text("Create Manual Entry")}
+    )
+}
 
 
 

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.todolist_app_project.LoginViewModel
 import kotlinx.coroutines.launch
 
@@ -55,9 +56,9 @@ fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewMode
                     modifier = Modifier.padding(0.dp)
                 ) {
                     Text(
-                        "Welcome"
+                        "Welcome", fontSize = 30.sp
                     )
-                    Text("Name: ")
+                    Text("Name: ", fontSize = 20.sp)
                 }
 
             }
