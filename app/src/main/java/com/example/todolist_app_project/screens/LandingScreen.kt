@@ -1,11 +1,12 @@
 package com.example.todolist_app_project.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,7 +22,15 @@ fun LandingScreen(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-    Column {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(start = 24.dp, top = 500.dp, end = 24.dp, bottom = 24.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(18.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
         GetStartedButton(GetStartedButtonClick)
         LoginButton(LoginButtonClick)
     }
