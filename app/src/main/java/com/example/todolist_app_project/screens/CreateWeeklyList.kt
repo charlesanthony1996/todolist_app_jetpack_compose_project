@@ -1,6 +1,7 @@
 package com.example.todolist_app_project.screens
 
 import android.os.Build.VERSION_CODES.R
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -39,6 +40,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import androidx.compose.material.ListItem
 import com.google.common.base.Functions.compose
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 
 
@@ -64,8 +66,9 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
 
         ) {
             AddItemForm()
-            ItemList()
+//            ItemList()
             ClearCompleteList()
+            ShowItemsByLoggedInUser()
 
 
 //            firebase addition
@@ -171,7 +174,7 @@ fun ItemList() {
         }
 
     Column {
-        AddItemForm()
+//        AddItemForm()
         items.value.forEach { item ->
             ListItem(
                 text = { Text("${item["item_name"]} - ${item["item_price"]}")},
@@ -198,6 +201,22 @@ fun ClearCompleteList() {
     }
 }
 
+
+@Composable
+fun ShowItemsByLoggedInUser() {
+    val user = FirebaseAuth.getInstance().currentUser
+    val itemsRef = FirebaseFirestore.getInstance().collection("items")
+    val query = itemsRef.whereEqualTo("userId", user?.uid)
+
+    query.get().addOnSuccessListener { querySnapshot ->
+        for (doc in querySnapshot) {
+//            println("${doc.id} => ${doc.data}")
+            Log.d("MyTag", "${doc.id} => ${doc.data}")
+        }
+    }
+
+
+}
 
 
 

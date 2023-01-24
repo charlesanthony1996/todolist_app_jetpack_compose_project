@@ -28,11 +28,24 @@ fun EmailLoginScreen(viewModel: LoginViewModel) {
         if (viewModel.error.value.isNotBlank()) {
             ErrorField(viewModel)
         }
+        NameField(viewModel)
         EmailField(viewModel)
         PasswordField(viewModel)
         ButtonEmailPasswordLogin(viewModel)
         ButtonEmailPasswordCreate(viewModel)
     }
+}
+
+@Composable
+fun NameField(viewModel: LoginViewModel) {
+    val userPassword = viewModel.name.value
+
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = userPassword,
+        label = { Text(text = stringResource(R.string.name)) },
+        onValueChange = { viewModel.setUserName(it) }
+    )
 }
 
 @Composable
@@ -46,6 +59,7 @@ fun EmailField(viewModel: LoginViewModel) {
         onValueChange = { viewModel.setUserEmail(it) }
     )
 }
+
 
 @Composable
 fun PasswordField(viewModel: LoginViewModel) {

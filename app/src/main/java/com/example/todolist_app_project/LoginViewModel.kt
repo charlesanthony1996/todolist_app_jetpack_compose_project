@@ -26,6 +26,9 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     private val _error = mutableStateOf("")
     val error: State<String> = _error
 
+    private val _name = mutableStateOf("")
+    val name: State<String> = _name
+
     private val _userEmail = mutableStateOf("")
     val userEmail: State<String> = _userEmail
 
@@ -33,6 +36,10 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     val password: State<String> = _password
 
     // Setters
+    fun setUserName(name: String) {
+        _name.value = name
+    }
+
     fun setUserEmail(email: String) {
         _userEmail.value = email
     }
