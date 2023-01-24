@@ -2,9 +2,7 @@ package com.example.todolist_app_project.screens
 
 import android.os.Build.VERSION_CODES.R
 import android.util.Log
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -50,25 +48,43 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
     val scope = rememberCoroutineScope()
 
 
-    Column( modifier = Modifier.padding(0.dp), verticalArrangement = Arrangement.Center) {
-        Scaffold(
-            scaffoldState = scaffoldState,
-            topBar = {
-                TopAppBar {
-                    Text("This is it")
-                }
-            },
-            bottomBar = {
-                BottomAppBar {
-                    Text("This is it")
-                }
-            },
-
-        ) {
-            AddItemForm()
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(start = 24.dp, top = 24.dp, end = 24.dp, bottom = 24.dp)
+            .fillMaxSize(),
+    )
+    {
+        AddItemForm()
+        ClearCompleteList()
+    }
+//        Scaffold(
+//            scaffoldState = scaffoldState,
+//            topBar = {
+//                TopAppBar {
+//                    Text("This is it")
+//                }
+//            },
+//            bottomBar = {
+//                BottomAppBar {
+//                    Text("This is it")
+//                }
+//            },
+//
+//        )
+//        {
+//            AddItemForm()
+//            Row {
+//                ClearCompleteList()
+//            }
 //            ItemList()
-            ClearCompleteList()
-            ShowItemsByLoggedInUser()
+//            ClearCompleteList()
+//            ShowItemsByLoggedInUser()
+//            Column(modifier = Modifier.padding(10.dp)) {
+//                Row{
+//                    ClearCompleteList()
+//                }
+//            }
 
 
 //            firebase addition
@@ -105,8 +121,8 @@ fun CreateWeeklyListScreen(viewModel: LoginViewModel) {
 //                Text("Submit")
 //            }
 
-        }
-    }
+//        }
+//    }
 }
 
 
