@@ -43,6 +43,9 @@ import androidx.compose.ui.unit.sp
 import com.google.common.base.Functions.compose
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @Composable
@@ -217,21 +220,42 @@ fun ItemList() {
 }
 
 @OptIn(ExperimentalMaterialApi::class)
+//OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun ShowTotalField() {
     val totalPrice = remember { mutableStateOf(0.0) }
+
+    val task = FirebaseFirestore.getInstance()
+        .collection("items")
+        .get()
+
+//    launch {
+//        val snapshot = task.await()
+//        totalPrice.value = snapshot.documents
+//            .map { it.getDouble("item_price") ?: 0.0 }
+//            .sum()
+//    }
+
+//    launch {
+//        val snapshot = FirebaseFirestore.getInstance()
+//            .collection("items")
+//            .get()
+//            .await()
+//        totalPrice.value = snapshot.documents
+//            .map { it.getDouble("price") ?: 0.0 }
+//            .sum()
+//    }
 
     FirebaseFirestore.getInstance()
         .collection("items")
         .get()
         .addOnSuccessListener { snapshot ->
-            totalPrice.value = snapshot.documents.sumOf {
-                it.getDouble("item_price") ?: 0.0
-            }
+            totalPrice.value = snapshot.documents
+                .map { it.getDouble("item_price") ?: 0.0 }
+                .sum()
         }
 
-    Text("Total Price: $totalPrice", fontSize = 20.sp)
-
+    Text("Total: $totalPrice")
 }
 
 @Composable
