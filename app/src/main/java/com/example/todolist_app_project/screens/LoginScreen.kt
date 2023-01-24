@@ -87,7 +87,7 @@ fun SignInWithEmailButton(buttonWidth: Dp, emailLoginClick: () -> Unit) {
         onClick = { emailLoginClick() },
         modifier = Modifier.width(buttonWidth),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = colorResource(R.color.red),
+            backgroundColor = colorResource(R.color.grey),
             contentColor = colorResource(R.color.white)
         )
     ) {
@@ -101,7 +101,7 @@ fun SignInWithGuestButton(buttonWidth: Dp, viewModel: LoginViewModel) {
         onClick = { viewModel.signInAnonymously() },
         modifier = Modifier.width(buttonWidth),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = colorResource(R.color.red),
+            backgroundColor = colorResource(R.color.grey),
             contentColor = colorResource(R.color.white)
         )
     ) {
@@ -122,7 +122,7 @@ fun SignInWithGoogleButton(buttonWidth: Dp, viewModel: LoginViewModel) {
     OutlinedButton(
         modifier = Modifier.width(buttonWidth),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = colorResource(R.color.fui_bgGoogle),
+            backgroundColor = colorResource(R.color.grey),
             contentColor = MaterialTheme.colors.onSurface
         ),
         onClick = {
