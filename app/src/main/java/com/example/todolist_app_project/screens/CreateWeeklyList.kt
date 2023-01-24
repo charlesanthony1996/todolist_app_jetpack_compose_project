@@ -37,6 +37,7 @@ import com.example.todolist_app_project.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import androidx.compose.material.ListItem
+import androidx.compose.ui.unit.sp
 import com.google.common.base.Functions.compose
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -195,7 +196,8 @@ fun ItemList() {
 //        AddItemForm()
         items.value.forEach { item ->
             ListItem(
-                text = { Text("${item["item_name"]} - ${item["item_price"]}") },
+                text = { Text("${item["item_name"]} - ${item["item_price"]}",
+                    fontSize = 25.sp)},
                 modifier = Modifier.width(200.dp).height(50.dp)
             )
         }
