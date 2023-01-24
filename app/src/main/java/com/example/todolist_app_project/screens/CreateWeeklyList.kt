@@ -37,6 +37,8 @@ import com.example.todolist_app_project.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import androidx.compose.material.ListItem
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import com.google.common.base.Functions.compose
 import com.google.firebase.auth.FirebaseAuth
@@ -171,8 +173,15 @@ fun AddItemForm() {
                         itemName.value = ""
                         itemPrice.value = ""
                     }
-            }) {
-                Text("Submit")
+            },
+                modifier = Modifier.width(60.dp)
+            ) {
+//                Text("Submit", fontSize = 10.sp)
+                Icon(
+                    Icons.Filled.Check,
+                    contentDescription = "Check item into db",
+
+                )
             }
         }
     }

@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolist_app_project.LoginViewModel
 import kotlinx.coroutines.launch
+//import androidx.compose.runtime.savedinstancestate.savedInstanceState
+//import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
 
 
 @Composable
@@ -102,3 +104,34 @@ fun CreateButton(buttonWidth: Dp, CreateWeeklyListClick: () -> Unit) {
         Text("Create")
     }
 }
+
+//@Composable
+//fun CaptureProduct() {
+//    val state = rememberSavedInstanceState { CameraState()}
+//    Column(
+//
+//    ) {
+//
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
