@@ -1,26 +1,25 @@
 package com.example.todolist_app_project.screens
 
+import android.icu.util.Calendar
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolist_app_project.LoginViewModel
-import kotlinx.coroutines.launch
-//import androidx.compose.runtime.savedinstancestate.savedInstanceState
-//import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
+import java.text.SimpleDateFormat
+import java.util.*
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
     Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center) {
@@ -60,7 +59,8 @@ fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewMode
                     Text(
                         "Welcome", fontSize = 30.sp
                     )
-                    Text("Name: ", fontSize = 20.sp)
+                    val userName = viewModel.name.value
+                    Text(userName.toString(), fontSize = 20.sp)
                 }
 
             }
@@ -78,10 +78,10 @@ fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewMode
 //                    your card content here
                     modifier = Modifier.padding(0.dp)
                 ) {
-                    Text(
-                        "Current Month"
-                    )
-                    Text("February: ")
+                    Text("Current Month")
+                    val calendar = Calendar.getInstance()
+                    val currentMonth = SimpleDateFormat("MMMM", Locale.getDefault()).format(calendar.time)
+                    Text("$currentMonth: ")
                     Text("Spent: 90€")
                     Text("See details")
                 }

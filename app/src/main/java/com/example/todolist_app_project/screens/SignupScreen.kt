@@ -20,9 +20,6 @@ import com.example.todolist_app_project.R
 
 @Composable
 fun SignupScreen(viewModel: LoginViewModel) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -35,13 +32,11 @@ fun SignupScreen(viewModel: LoginViewModel) {
             ErrorField(viewModel)
         }
 
-//        add composable functions here
+//      add composable functions here
         NameFieldElement(viewModel)
         EmailFieldElement(viewModel)
         PasswordFieldElement(viewModel)
         CreateSignupButton(viewModel)
-
-
     }
 
 }
