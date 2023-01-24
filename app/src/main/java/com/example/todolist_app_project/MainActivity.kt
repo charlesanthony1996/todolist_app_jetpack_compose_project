@@ -3,14 +3,20 @@ package com.example.todolist_app_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,7 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.todolist_app_project.screens.*
 import com.example.todolist_app_project.ui.theme.NavigationTheme
-import  com.example.todolist_app_project.screens.TopBar
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,38 +47,141 @@ fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
         loginViewModel.isLoggedIn
     )
     NavigationTheme {
-        Scaffold(
-            topBar = { TopBar(navController, currentScreen) }
-        ) {
-            NavigateBetweenScreen(navController)
-        }
-    }
-}
 
-/*@Composable
-fun TopBar(navController: NavHostController, currentScreen: NavigationEnum) {
-    TopAppBar(
-        title = { Text(text = stringResource(currentScreen.title)) },
-        // To avoid going back to previous screen after login/logout click
-        navigationIcon = {
-            println("$currentScreen")
-            if (currentScreen != NavigationEnum.Home && currentScreen != NavigationEnum.Landing) {
-                NavigateBackButton(navController)
-            } else if (currentScreen == NavigationEnum.Home) {
+        val scaffoldState = rememberScaffoldState()
+        val scope = rememberCoroutineScope()
 
+        Column(modifier = Modifier.padding(top = 0.dp), verticalArrangement = Arrangement.Center) {
+            Scaffold(
+                scaffoldState = scaffoldState,
+                topBar = {
+                    TopAppBar(
+                        title = { Text(text = stringResource(currentScreen.title)) },
+                        navigationIcon = {
+                            if (currentScreen != NavigationEnum.Home && currentScreen != NavigationEnum.Landing) {
+                                Button(
+                                    onClick = { navController.popBackStack() },
+                                    contentPadding = PaddingValues(start = 0.dp, end = 0.dp)
+                                ) {
+                                    Icon(Icons.Filled.ArrowBack, stringResource(R.string.back_icon))
+                                }
+                            } else if (currentScreen == NavigationEnum.Home) {
+                                Button(
+                                    onClick = {},
+                                    contentPadding = PaddingValues(start = 0.dp, end = 0.dp)
+                                ) {
+                                    Icon(
+                                        Icons.Filled.Menu,
+                                        contentDescription = "Menu",
+                                        modifier = Modifier
+                                            .size(ButtonDefaults.IconSize)
+                                            .clickable(onClick = {
+                                                scope.launch {
+                                                    scaffoldState.drawerState.apply {
+                                                        if (isClosed) open() else close()
+                                                    }
+                                                }
+                                            })
+                                    )
+                                }
+                            }
+                        }
+                    )
+                },
+                drawerContent = {
+                    Column {
+                        Card(modifier = Modifier.fillMaxWidth())
+                        {
+                            Icon(
+                                Icons.Outlined.AccountCircle,
+                                contentDescription = "User profile picture",
+                                modifier = Modifier.size(50.dp)
+                            )
+                        }
+                        Divider()
+                        Spacer(modifier = Modifier.fillMaxWidth())
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Profile")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("My items")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Overview")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("External links")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Configuration")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {},
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("About")
+                        }
+                        Divider()
+                        Button(
+                            onClick = {
+                                scope.launch {
+                                    scaffoldState.drawerState.apply {
+                                        close()
+                                    }
+                                }
+                                loginViewModel.signOut()
+                            },
+                            contentPadding = PaddingValues(
+                                start = 0.dp, end = 0.dp
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        ) { Text("Logout") }
+                    }
+                },
+            ) {
+                NavigateBetweenScreen(navController)
             }
         }
-    )
-}
-
-@Composable
-fun NavigateBackButton(navController: NavHostController) {
-    IconButton(onClick = { navController.popBackStack() },
-        modifier = Modifier.semantics { contentDescription = "back button" }) {
-
-        Icon(Icons.Filled.ArrowBack, stringResource(R.string.back_icon))
     }
-}*/
+}
 
 @Composable
 fun NavigateBetweenScreen(
