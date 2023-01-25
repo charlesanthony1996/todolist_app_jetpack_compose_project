@@ -75,7 +75,6 @@ fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewMode
                 elevation = 10.dp
             ) {
                 Column(
-//                    your card content here
                     modifier = Modifier.padding(0.dp)
                 ) {
                     Text("Current Month")

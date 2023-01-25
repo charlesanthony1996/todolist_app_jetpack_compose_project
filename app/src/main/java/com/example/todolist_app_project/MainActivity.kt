@@ -1,8 +1,10 @@
 package com.example.todolist_app_project
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -29,6 +31,7 @@ import com.example.todolist_app_project.ui.theme.NavigationTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -37,6 +40,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     val navController = rememberNavController()
@@ -183,6 +187,7 @@ fun BaseScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun NavigateBetweenScreen(
     navController: NavHostController,
@@ -245,6 +250,7 @@ fun signupPage(builder: NavGraphBuilder, loginViewModel: LoginViewModel) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 fun homePage(
     builder: NavGraphBuilder,
     navController: NavHostController,
@@ -265,14 +271,14 @@ fun createWeeklyListPage(
 ) {
     builder.composable(route = NavigationEnum.CreateWeeklyList.name) {
         CreateWeeklyListScreen(
-            CreateManualEntryClick = { navController.navigate(NavigationEnum.ManualEntry.name)},
+            CreateManualEntryClick = { navController.navigate(NavigationEnum.ManualEntry.name) },
             viewModel = loginViewModel
         )
     }
 }
 
 fun createManualEntryPage(
-    builder:NavGraphBuilder,
+    builder: NavGraphBuilder,
     loginViewModel: LoginViewModel
 ) {
     builder.composable(route = NavigationEnum.ManualEntry.name) {

@@ -31,14 +31,12 @@ fun SignupScreen(viewModel: LoginViewModel) {
         if (viewModel.error.value.isNotBlank()) {
             ErrorField(viewModel)
         }
-
 //      add composable functions here
         NameFieldElement(viewModel)
         EmailFieldElement(viewModel)
         PasswordFieldElement(viewModel)
         CreateSignupButton(viewModel)
     }
-
 }
 
 
