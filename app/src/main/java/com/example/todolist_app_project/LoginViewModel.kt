@@ -129,7 +129,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
                     Log.d(TAG, "signInAnonymously:success")
                     val user = Firebase.auth.currentUser
                     _isLoggedIn.value = true
-                    // Navigate to Welcome Screen
+                    // Navigate to Home Screen
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInAnonymously:failure", task.exception)

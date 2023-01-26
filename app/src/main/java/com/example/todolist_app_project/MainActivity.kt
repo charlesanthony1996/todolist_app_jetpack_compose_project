@@ -230,8 +230,8 @@ fun loginPage(
     builder.composable(route = NavigationEnum.Login.name) {
         loginViewModel.setError("")
         LoginScreen(
-            emailLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
-            guestLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
+//            emailLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
+//            guestLoginClick = { navController.navigate(NavigationEnum.EmailLogin.name) },
             viewModel = loginViewModel
         )
     }
