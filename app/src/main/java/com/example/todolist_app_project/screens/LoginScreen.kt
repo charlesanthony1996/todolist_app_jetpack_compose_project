@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
@@ -33,7 +34,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.todolist_app_project.LoginViewModel
 import com.example.todolist_app_project.R
 import com.example.todolist_app_project.ui.theme.accentBlue
+import com.example.todolist_app_project.ui.theme.grey
 import com.example.todolist_app_project.ui.theme.lightBlue
+import com.example.todolist_app_project.ui.theme.white
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -57,7 +60,6 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 //        val buttonWidth = 300.dp
-        Spacer(modifier = Modifier.height(18.dp))
 
         if (viewModel.error.value.isNotBlank()) {
             ErrorField(viewModel)
@@ -159,7 +161,8 @@ fun OrOtherOptions(viewModel: LoginViewModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
+
     ) {
         Text(
             modifier = Modifier.padding(top = 24.dp),
@@ -173,7 +176,7 @@ fun OrOtherOptions(viewModel: LoginViewModel) {
     }
 
     Text(
-        text = "Sign up Using:",
+        text = "Sign in Using:",
         style = TextStyle(
             color = Color.White,
             fontSize = 18.sp,
@@ -189,9 +192,9 @@ fun OrOtherOptions(viewModel: LoginViewModel) {
 
     Row(
         modifier = Modifier
-            .padding(top = 18.dp)
+            .padding(top = 28.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Icon(
             tint = Color.Unspecified,
@@ -212,6 +215,17 @@ fun OrOtherOptions(viewModel: LoginViewModel) {
                     launcher.launch(googleSignInClient.signInIntent)
                 }),
         )
+
+        Icon(
+            tint = Color.White,
+            modifier = Modifier
+                .width(48.dp)
+                .height(48.dp)
+                .clickable (onClick = { viewModel.signInAnonymously() }) ,
+            painter = painterResource(R.drawable.ic_baseline_login_24),
+            contentDescription = "Guest",
+
+            )
     }
 }
 
