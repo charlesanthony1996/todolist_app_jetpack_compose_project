@@ -10,9 +10,13 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 private const val TAG = "LoginViewModel"
@@ -35,6 +39,10 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     private val _password = mutableStateOf("")
     val password: State<String> = _password
 
+
+    private val db = FirebaseFirestore.getInstance()
+
+
     // Setters
     fun setUserName(name: String) {
         _name.value = name
@@ -56,23 +64,34 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         _isLoggedIn.value = getCurrentUser() != null
     }
 
-    fun createUserWithEmailAndPassword() = viewModelScope.launch {
+    suspend fun createUserWithEmailAndPassword() = viewModelScope.launch {
         _error.value = ""
+
         Firebase.auth.createUserWithEmailAndPassword(userEmail.value, password.value)
-            .addOnCompleteListener { task -> signInCompletedTask(task) }
+            .addOnCompleteListener { task ->
+                GlobalScope.launch(Dispatchers.IO) {
+                    signUpCompletedTask(
+                        task
+                    )
+                }
+            }
     }
 
     fun signInWithEmailAndPassword() = viewModelScope.launch {
         try {
             _error.value = ""
+
             Firebase.auth.signInWithEmailAndPassword(userEmail.value, password.value)
                 .addOnCompleteListener { task -> signInCompletedTask(task) }
         } catch (e: Exception) {
             _error.value = e.localizedMessage ?: "Unknown error"
-            Log.d(TAG, "Sign in fail: $e")
+//            Log.d(TAG, "Sign in fail: $e")
         }
     }
 
+    //
+    // Only google sign in stuff here ˇˇ
+    //
     fun signInWithGoogleToken(token: String) {
         val credential = GoogleAuthProvider.getCredential(token, null)
         signWithCredential(credential)
@@ -87,12 +106,20 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             _error.value = e.localizedMessage ?: "Unknown error"
         }
     }
+    //
+    // Only google sign in stuff here^^
+    //
 
-    private fun signInCompletedTask(task: Task<AuthResult>) {
+    suspend private fun signUpCompletedTask(task: Task<AuthResult>) {
         if (task.isSuccessful) {
             Log.d(TAG, "SignInWithEmail:success")
-            _userEmail.value = ""
             _password.value = ""
+
+            FirebaseFirestore.getInstance().collection("users")
+                .add(mapOf("email" to name.value, "name" to userEmail.value))
+                .addOnSuccessListener {
+                    println("added to users database")
+                }.await()
         } else {
             _error.value = task.exception?.localizedMessage ?: "Unknown error"
             // If sign in fails, display a message to the user.
@@ -103,13 +130,27 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun getCurrentUser() : FirebaseUser? {
+    private fun signInCompletedTask(task: Task<AuthResult>) {
+        if (task.isSuccessful) {
+            Log.d(TAG, "SignInWithEmail:success")
+            _password.value = ""
+        } else {
+            _error.value = task.exception?.localizedMessage ?: "Unknown error"
+            // If sign in fails, display a message to the user.
+//            Log.w(TAG, "SignInWithEmail:failure", task.exception)
+        }
+        viewModelScope.launch {
+            _isLoggedIn.value = getCurrentUser() != null
+        }
+    }
+
+    private fun getCurrentUser(): FirebaseUser? {
         val user = Firebase.auth.currentUser
-        Log.d(TAG, "user display name: ${user?.displayName}, email: ${user?.email}")
+        Log.d(TAG, "user display name: ${_name.value}, email: ${user?.email}")
         return user
     }
 
-    fun isValidEmailAndPassword() : Boolean {
+    fun isValidEmailAndPassword(): Boolean {
         if (userEmail.value.isBlank() || password.value.isBlank()) {
             return false
         }
@@ -138,7 +179,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             }
     }
 
-    fun goToCreateWeeklyList() = viewModelScope.launch {
+    /*fun goToCreateWeeklyList() = viewModelScope.launch {
 
         if (_isLoggedIn.value) {
             NavigationEnum.CreateWeeklyList.title
@@ -147,5 +188,5 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             NavigationEnum.CreateWeeklyList.title
         }
 
-    }
+    }*/
 }

@@ -2,6 +2,7 @@ package com.example.todolist_app_project.screens
 
 import android.hardware.camera2.params.BlackLevelPattern
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -21,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 //import androidx.room.*
 import com.example.todolist_app_project.ui.theme.NavigationTheme
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 
@@ -192,4 +194,39 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+fun saveFireStore(firstname: String, lastname: String) {
+    val db = FirebaseFirestore.getInstance()
+    val user: MutableMap<String, Any> = HashMap()
+    user["firstName"] = firstname
+    user["lastName"] = lastname
+
+    db.collection("users")
+        .add(user)
+        .addOnSuccessListener {
+//            Toast.makeText(this@MainActivity, "record added successfully ", Toast.LENGTH_SHORT ).show()
+        }
+        .addOnFailureListener{
+//            Toast.makeText(this@MainActivity, "record Failed to add ", Toast.LENGTH_SHORT ).show()
+        }
+    readFireStoreData()
+}
+
+fun readFireStoreData() {
+    val db = FirebaseFirestore.getInstance()
+    db.collection("users")
+        .get()
+        .addOnCompleteListener {
+
+            val result: StringBuffer = StringBuffer()
+
+            if(it.isSuccessful) {
+                for(document in it.result!!) {
+                    result.append(document.data.getValue("firstName")).append(" ")
+                        .append(document.data.getValue("lastName")).append("\n\n")
+                }
+//                textViewResult.setText(result)
+            }
+        }
+
 }

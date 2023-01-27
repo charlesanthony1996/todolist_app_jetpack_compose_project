@@ -26,6 +26,9 @@
     <!-- create weekly list screen -->
     <string name="create_weekly_list">Create Weekly List</string>
 
+    <!-- new entry screen -->
+    <string name="new_entry">New Entry</string>
+
 <!--    sign up screen-->
     <string name="home">Home</string>
     <string name="signup">Signup</string>

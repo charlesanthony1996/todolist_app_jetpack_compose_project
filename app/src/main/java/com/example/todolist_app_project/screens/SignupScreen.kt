@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +22,7 @@ import com.example.todolist_app_project.LoginViewModel
 import com.example.todolist_app_project.R
 import com.example.todolist_app_project.ui.theme.accentBlue
 import com.example.todolist_app_project.ui.theme.lightBlue
+import kotlinx.coroutines.*
 
 
 @Composable
@@ -128,11 +130,24 @@ fun PasswordFieldElement(viewModel: LoginViewModel) {
     )
 }
 
+@OptIn(InternalCoroutinesApi::class)
 @Composable
 fun CreateSignupButton(viewModel: LoginViewModel) {
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val createUser: () -> Unit = {
+        GlobalScope.launch(Dispatchers.IO) {
+            delay(1000L)
+            viewModel.createUserWithEmailAndPassword()
+        }
+    }
+
     Button(
         enabled = viewModel.isValidEmailAndPassword(),
-        onClick = { viewModel.createUserWithEmailAndPassword() },
+        onClick = {
+            createUser()
+                  },
         modifier = Modifier
             .width(200.dp)
             .height(40.dp),

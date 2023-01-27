@@ -18,6 +18,9 @@ enum class NavigationEnum (val title: Int) {
     Home(
         title = R.string.home
     ),
+    NewEntryPage(
+        title = R.string.new_entry
+    ),
     CreateWeeklyList(
         title = R.string.create_weekly_list
     ),
@@ -27,7 +30,6 @@ enum class NavigationEnum (val title: Int) {
 
     companion object {
         fun fromRoute(route: String?, isLoggedIn: State<Boolean>): NavigationEnum {
-
             return when (route?.substringBefore("/")) {
                 Login.name -> Login
                 Landing.name -> Landing
@@ -35,40 +37,16 @@ enum class NavigationEnum (val title: Int) {
                 EmailLogin.name -> EmailLogin
                 Home.name -> Home
                 CreateWeeklyList.name -> CreateWeeklyList
+                NewEntryPage.name -> NewEntryPage
                 ManualEntry.name -> ManualEntry
                 else -> Login // Redirects to Login if some other page, but not logged in
             }
-            /*return if (!isLoggedIn.value) {
-                when (route?.substringBefore("/")) {
-                    Login.name -> Login
-                    Landing.name -> Landing
-                    Signup.name -> Signup
-                    EmailLogin.name -> EmailLogin
-                    Home.name -> Home
-                    CreateWeeklyList.name -> CreateWeeklyList
-                    else -> Login // Redirects to Login if some other page, but not logged in
-                }
-            } else {
-                // Define here all your logged in routes
-                when (route?.substringBefore("/")) {
-                    Landing.name -> Home
-                    Login.name -> Home
-                    Signup.name -> Home
-                    EmailLogin.name -> Home
-                    CreateWeeklyList.name -> Home
-                    Home.name -> Home
-
-                    null -> Home
-
-                    else -> throw IllegalArgumentException("Route $route is not recognized.")
-                }
-            }*/
         }
 
-        fun toRoute(route: String?, isLoggedIn: State<Boolean>) {
+        /*fun toRoute(route: String?, isLoggedIn: State<Boolean>) {
             when (route?.substringBefore("/")) {
                 CreateWeeklyList.name -> CreateWeeklyList
             }
-        }
+        }*/
     }
 }

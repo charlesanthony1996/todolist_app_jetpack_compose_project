@@ -1,39 +1,40 @@
 package com.example.todolist_app_project.screens
 
+import android.content.ContentValues.TAG
 import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradientShader
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.example.todolist_app_project.LoginViewModel
 import com.example.todolist_app_project.ui.theme.accentBlue
 import com.example.todolist_app_project.ui.theme.lightBlue
 import com.example.todolist_app_project.ui.theme.white
-import com.facebook.share.widget.LikeView.HorizontalAlignment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.asDeferred
+import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
-fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
+fun HomeScreen(NavigateToNewEntryScreen: () -> Unit, viewModel: LoginViewModel) {
     Column(
         modifier = Modifier
             .padding(28.dp),
@@ -47,13 +48,14 @@ fun HomeScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewMode
 
         CurrentMonthDisplayCard()
 
-        CreateNewEntryButton(CreateWeeklyListScreenClick)
-
+        CreateNewEntryButton(NavigateToNewEntryScreen)
     }
 }
 
 @Composable
 fun UserWelcome(viewModel: LoginViewModel) {
+
+
     Column(
     ) {
         Text(
@@ -64,7 +66,42 @@ fun UserWelcome(viewModel: LoginViewModel) {
                 color = lightBlue
             )
         )
-        val userName = viewModel.name.value
+
+        /*LaunchedEffect(true){
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .whereEqualTo("email", FirebaseAuth.getInstance().currentUser?.email.toString())
+                .get()
+                .addOnCompleteListener {results ->
+//                    user = results.result.documents.map {  it.data as Map<String, Any> }
+                    println( "auth email: " + FirebaseAuth.getInstance().currentUser?.email.toString())
+                    for(chap in results.result.documents.map {  it.data as Map<String, Any> }){
+                        println("User: " + chap.entries)
+                    }
+                }
+                .addOnFailureListener{
+                    print("Failure")
+                }
+                .await()
+        }*/
+
+        val user = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
+
+        LaunchedEffect(true) {
+            val result = FirebaseFirestore.getInstance()
+                .collection("users")
+                .whereEqualTo("email", FirebaseAuth.getInstance().currentUser?.email.toString())
+                .get()
+                .asDeferred()
+                .await()
+
+            user.value = result.documents.map { it.data as Map<String, Any> }
+
+            println(user.value)
+
+        }
+
+        val userName = user.value[0]["name"].toString()
         Text(
             text = userName,
             style = TextStyle(
@@ -72,6 +109,14 @@ fun UserWelcome(viewModel: LoginViewModel) {
                 fontWeight = FontWeight.Bold,
             )
         )
+
+        /*Text(
+            text = "userName",
+            style = TextStyle(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+            )
+        )*/
     }
 }
 

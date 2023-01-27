@@ -1,3 +1,4 @@
+/*
 package com.example.todolist_app_project.screens
 
 import androidx.compose.foundation.layout.*
@@ -96,4 +97,4 @@ fun ButtonEmailPasswordCreate(viewModel: LoginViewModel) {
         content = { Text(text = stringResource(R.string.create)) },
         onClick = { viewModel.createUserWithEmailAndPassword() }
     )
-}
+}*/

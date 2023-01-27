@@ -17,7 +17,7 @@ import com.example.todolist_app_project.LoginViewModel
 
 
 @Composable
-fun CreateManualEntryScreen(viewModel: LoginViewModel) {
+fun CreateManualEntryScreen(CreateWeeklyListScreenClick: () -> Unit, viewModel: LoginViewModel) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
